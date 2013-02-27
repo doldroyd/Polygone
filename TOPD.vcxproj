@@ -11,11 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine.h" />
+    <ClInclude Include="src\Engine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{534CB1D7-23DB-4DA8-A786-397BBA9F14CF}</ProjectGuid>
