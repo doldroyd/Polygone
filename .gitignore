@@ -164,6 +164,7 @@ $RECYCLE.BIN/
 # http://www.gnu.org/software/automake
 
 Makefile.in
+Makefile
 
 # http://www.gnu.org/software/autoconf
 
@@ -171,6 +172,12 @@ Makefile.in
 /aclocal.m4
 /compile
 /configure
+/config.status
 /depcomp
 /install-sh
 /missing
+/config.h.in
+/config.h
+/src/.deps
+/src/topd
+/stamp-h1
