@@ -1,30 +1,29 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "SDL.h"
+#include <map>
+#include <vector>
 
-class Engine {
-private:
-	int windowWidth;
-	int windowHeight;
-	int windowBPP;
+#include "System.h"
 
-	SDL_Surface* screen;
+class Engine{
+	public:
+		Engine();
+		~Engine();
 
-	bool running;
+		int createEntity();
+		void deleteEntity(int EntityID);
+		bool registerSystem(System &s);
+		System* getSystem(std::string name);
+	
+		void run();
 
-	void Events();
-	void Loop();
-	void Render();
+	private:
+		std::map<std::string, System> systemDecoder;
+		std::vector<System> systems;
 
-public:
-	Engine(void);
-	~Engine(void);
-
-	bool Init();
-	void Run();
-	void Cleanup();
-
+		bool running;
+		int nextEntity;
 };
 
-#endif // ENGINE_H
+#endif //ENGINE_H
