@@ -13,10 +13,10 @@ Input::Key(void){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP: position.x += 5; break; //Need correct position component
-			case SDLK_DOWN: position.x -= 5; break; //Need correct position component
-			case SDLK_LEFT: position.y -= 5; break; //Need correct position component
-			case SDLK_RIGHT: position.y += 5; break; //Need correct position component
+			case SDLK_UP: position.y += 5; break; //Need correct position component
+			case SDLK_DOWN: position.y -= 5; break; //Need correct position component
+			case SDLK_LEFT: position.x -= 5; break; //Need correct position component
+			case SDLK_RIGHT: position.x += 5; break; //Need correct position component
 			default : ;
 		}
 	}
@@ -26,8 +26,8 @@ Input::Mouse(void){
 	//While the mouse is moving, constantly get its position
 	while(event.type == SDL_MOUSEMOTION)
 	{
-		x = event.motion.x;
-		y = event.motion.y;
+		mx = event.motion.mx;
+		my = event.motion.my;
 	}
 
 	//While a mouse button is pressed
@@ -37,8 +37,8 @@ Input::Mouse(void){
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
-            x = event.button.x; //Need position component?
-            y = event.button.y; //Need position component?
+            mx = event.button.mx;
+            my = event.button.my;
         }
     }
 	    //If a mouse button was released
@@ -48,13 +48,13 @@ Input::Mouse(void){
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
-            x = event.button.x; //Need position component?
-            y = event.button.y; //Need position component?
+            mx = event.button.mx;
+            my = event.button.my;
 
             //If the mouse is over the button
-            if( ( x > box.x ) && ( x < box.x + box.w ) && ( y > box.y ) && ( y < box.y + box.h ) )
-            {
-            }
+           // if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
+            //{
+            //}
         }
     }
 }
