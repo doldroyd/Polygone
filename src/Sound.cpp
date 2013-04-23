@@ -28,6 +28,8 @@ bool SoundSystem::init()
   return true;
 }
 
+void update(std::chrono::duration time)
+
 void SoundSystem::cleanup()
 {
   Mix_FreeChunk( sound1 );
@@ -44,7 +46,95 @@ void SoundSystem::cleanup()
   Mix_CloseAudio();
 }
 
+Component* SoundSystem::getEntity(int EntityID)
+{
+  return &(entities[EntityID]);
+}
 
 
+bool SoundSystem::removeEntity( int EntityID)
+{
+  return( entities.erase( EntityID ) > 0 ? true : false );
+}
 
+void SoundSystem::update(std::chrono::duration time)
+{
+  while( entities.size() > 0 )
+  {
+    Component tempComponent = entities.begin()->second); 
+	if( tempComponent.soundname == "musicon" )
+	{
+	  //do music on things
+		if( Mix_PlayingMusix == 0 )
+		{
+		  if( Mix_PlayMusic( music, -1 ) == -1 )
+		    return;
+		}
+	}
 
+	
+	if( tempComponent.soundname == "musicpause" )
+	{	 
+		//do music pause things
+		if( Mix_PlayingMusix == 0 )
+		{
+		  if( Mix_PlayMusic( music, -1 ) == -1 )
+			  return;
+		}
+		else
+        {
+            //If the music is paused
+            if( Mix_PausedMusic() == 1 )
+            {
+                //Resume the music
+                Mix_ResumeMusic();
+            }
+            //If the music is playing
+            else
+            {
+                //Pause the music
+                Mix_PauseMusic();
+            }
+        }
+	}
+	else if( tempComponent.soundname == "musicoff" )
+	{
+      //do music off things
+      Mix_HaltMusic();
+	}
+	switch( tempComponent.soundname )
+	{
+	  case "sound1" : if( Mix_PlayChannel( tempComponent.channel, sound1, 0 ) ) == -1 )
+					    return;
+		              break;
+      case "sound2" : if( Mix_PlayChannel( tempComponent.channel, sound2, 0 ) ) == -1 )
+					    return;
+		              break;
+	  case "sound3" : if( Mix_PlayChannel( tempComponent.channel, sound3, 0 ) ) == -1 )
+					    return;
+		              break;
+	  case "sound4" : if( Mix_PlayChannel( tempComponent.channel, sound4, 0 ) ) == -1 )
+					    return;
+		              break;
+	  case "sound5" : if( Mix_PlayChannel( tempComponent.channel, sound5, 0 ) ) == -1 )
+					    return;
+					  break;
+	  case "sound6" : if( Mix_PlayChannel( tempComponent.channel, sound6, 0 ) ) == -1 )
+					    return;
+		              break;
+	  case "sound7" : if( Mix_PlayChannel( tempComponent.channel, sound7, 0 ) ) == -1 )
+					    return;
+		              break;
+      case "sound8" : if( Mix_PlayChannel( tempComponent.channel, sound8, 0 ) ) == -1 )
+					    return;
+		              break;
+	  case "sound9" : if( Mix_PlayChannel( tempComponent.channel, sound9, 0 ) ) == -1 )
+					    return;
+		              break;
+	  case "soundn" : if( Mix_PlayChannel( tempComponent.channel, soundn, 0 ) ) == -1 )
+					    return;
+	}
+	entities.erase( entities.begin() );
+  //get rid of this component / / get next component
+  }
+}	              
