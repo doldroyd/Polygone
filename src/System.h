@@ -4,15 +4,15 @@
 class Component;
 
 class System {
-  public:
+	public:
 		System(Engine* e);
-		virtual ~System();
+		~System();
 
-		virtual bool init() = 0;
-		virtual void update(time) = 0;
+		virtual void init() = 0;
+		virtual void update(unsigned int delay) = 0;
 		virtual void cleanup() = 0;
 
-		virtual bool addEntity(int EntityID) = 0;
+		virtual Component* addEntity(int EntityID) = 0;
 		virtual Component* getEntity(int EntityID) = 0;
 		virtual bool removeEntity(int EntityID) = 0;
 
@@ -20,10 +20,10 @@ class System {
 			return priority < other.priority;
 		}
 
-		const std::string name;
-		const int priority;
+        static const std::string name;
 
 	protected:
+		int priority;
 		Engine* e;
 };
 

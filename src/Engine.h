@@ -3,8 +3,12 @@
 
 #include <map>
 #include <vector>
+#include <algorithm>
+#include <SDL.h>
 
 #include "System.h"
+
+#define INITIAL_DELAY 5
 
 class Engine{
 	public:
@@ -13,7 +17,7 @@ class Engine{
 
 		int createEntity();
 		void deleteEntity(int EntityID);
-		bool registerSystem(System &s);
+		bool registerSystem(System &s, std::string name);
 		System* getSystem(std::string name);
 	
 		void run();
