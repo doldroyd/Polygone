@@ -11,7 +11,9 @@
 
 #define INITIAL_DELAY 5
 
-class Engine{
+//class System;
+
+class Engine {
 	public:
 		Engine();
 		~Engine();

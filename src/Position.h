@@ -1,7 +1,7 @@
 #ifndef POSITION_H
-#define POSITION_H
+//#define POSITION_H
 
-
+#include <map>
 #include <SDL.h>
 
 #include "System.h"
@@ -15,7 +15,7 @@ class PositionComponent : public Component
 class PositionSystem : public System
 {
   private:
-    map<int, PositionComponent> position;
+    std::map<int, PositionComponent> position;
   
   public:
     PositionSystem(Engine* e);
