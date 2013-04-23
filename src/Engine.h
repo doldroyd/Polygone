@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <string>
 #include <SDL.h>
 
 #include "System.h"
@@ -15,6 +16,9 @@ class Engine{
 		Engine();
 		~Engine();
 
+        bool init();
+        void cleanup();
+
 		int createEntity();
 		void deleteEntity(int EntityID);
 		bool registerSystem(System &s, std::string name);
@@ -23,8 +27,8 @@ class Engine{
 		void run();
 
 	private:
-		std::map<std::string, System> systemDecoder;
-		std::vector<System> systems;
+		std::map<std::string, System*> systemDecoder;
+		std::vector<System*> systems;
 
 		bool running;
 		int nextEntity;
