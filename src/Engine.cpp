@@ -1,54 +1,57 @@
 #include "Engine.h"
 
-
-Engine::Engine(void) {
-	//TODO: read settings from file
-	windowWidth = 640;
-	windowHeight = 320;
-	windowBPP = 32;
+Engine::Engine() {
 }
 
-
-Engine::~Engine(void) {
+Engine::~Engine() {
 }
 
-bool Engine::Init(void) {
-	if(SDL_Init(SDL_INIT_EVERYTHING) < -1) {
+bool compareSystem(System *i, System *j) {
+    return i->priority < j->priority;
+}
+
+bool Engine::init() {
+    return SDL_Init(0) == 0;
+}
+
+void Engine::cleanup() {
+    for(auto &system : systemDecoder) {
+        system.second->cleanup();
+    }
+    SDL_Quit();
+}
+
+int Engine::createEntity() {
+	return nextEntity++;
+}
+
+void Engine::deleteEntity(int EntityID) {
+	for(auto &s : systems) {
+		s->removeEntity(EntityID);
+	}
+}
+
+bool Engine::registerSystem(System &s, std::string name) {
+	std::pair<std::map<std::string, System*>::iterator, bool> result;
+	result = systemDecoder.insert(std::make_pair(name, &s));
+	if(!result.second) {
 		return false;
 	}
-	screen = SDL_SetVideoMode(windowWidth, windowHeight, windowBPP, SDL_HWSURFACE | SDL_DOUBLEBUF);
-	if(screen == NULL) {
-		return false;
-	}
-	running = true;
+	systems.push_back(&s);
+	std::sort(systems.begin(), systems.end(), compareSystem);
 	return true;
 }
 
-void Engine::Run() {
-	while(running) {
-		Events();
-		Loop();
-		Render();
+System* Engine::getSystem(std::string name) {
+	return systemDecoder[name];
+}
+
+void Engine::run() {
+    unsigned int now, then = SDL_GetTicks();
+    SDL_Delay(INITIAL_DELAY);
+    while(running) {
+        now = SDL_GetTicks();
+        for(auto &s : systems) s->update(now - then);
+        then = now;
 	}
-}
-
-void Engine::Events() {
-	SDL_Event event;
-	while(SDL_PollEvent(&event)) {
-		switch(event.type) {
-		case SDL_QUIT:
-			running = false;
-		}
-	}
-}
-
-void Engine::Render() {
-}
-
-void Engine::Loop() {
-}
-
-void Engine::Cleanup() {
-	SDL_FreeSurface(screen);
-	SDL_Quit();
 }
