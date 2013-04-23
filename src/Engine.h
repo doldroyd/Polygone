@@ -7,11 +7,11 @@
 #include <string>
 #include <SDL.h>
 
-#include "System.h"
+//#include "System.h"
 
 #define INITIAL_DELAY 5
 
-//class System;
+class System;
 
 class Engine {
 	public:
@@ -23,7 +23,7 @@ class Engine {
 
 		int createEntity();
 		void deleteEntity(int EntityID);
-		bool registerSystem(System &s, std::string name);
+		bool registerSystem(System &s);
 		System* getSystem(std::string name);
 	
 		void run();

@@ -1,5 +1,5 @@
 #ifndef POSITION_H
-//#define POSITION_H
+#define POSITION_H
 
 #include <map>
 #include <SDL.h>

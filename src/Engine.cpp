@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "System.h"
 
 Engine::Engine() {
 }
@@ -15,7 +16,7 @@ bool Engine::init() {
 }
 
 void Engine::cleanup() {
-    for(auto &system : systemDecoder) {
+    for(auto system : systemDecoder) {
         system.second->cleanup();
     }
     SDL_Quit();
@@ -31,9 +32,9 @@ void Engine::deleteEntity(int EntityID) {
 	}
 }
 
-bool Engine::registerSystem(System &s, std::string name) {
+bool Engine::registerSystem(System &s) {
 	std::pair<std::map<std::string, System*>::iterator, bool> result;
-	result = systemDecoder.insert(std::make_pair(name, &s));
+	result = systemDecoder.insert(std::make_pair(s.name, &s));
 	if(!result.second) {
 		return false;
 	}
