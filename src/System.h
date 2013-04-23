@@ -1,30 +1,30 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-class Component;
+class Engine;
+
+class Component {
+};
 
 class System {
-  public:
+	public:
 		System(Engine* e);
-		virtual ~System();
+		~System();
 
-		virtual bool init() = 0;
-		virtual void update(time) = 0;
+		virtual void init() = 0;
+		virtual void update(unsigned int delay) = 0;
 		virtual void cleanup() = 0;
 
-		virtual bool addEntity(int EntityID) = 0;
 		virtual Component* getEntity(int EntityID) = 0;
 		virtual bool removeEntity(int EntityID) = 0;
 
-		bool operator<(const System& other) const {
-			return priority < other.priority;
-		}
-
-		const std::string name;
-		const int priority;
+        const std::string name;
+        const int priority;
 
 	protected:
 		Engine* e;
 };
+
+#include "Engine.h"
 
 #endif //SYSTEM_H
