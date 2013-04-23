@@ -53,12 +53,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(ProjectDir)SDL_mixer-1.2.12\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(ProjectDir)SDL_mixer-1.2.12\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(ProjectDir)SDL_mixer-1.2.12\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(ProjectDir)SDL_mixer-1.2.12\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -71,11 +71,18 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy SDL-1.2.15\lib\x86\SDL.dll Debug</Command>
+      <Command>copy SDL-1.2.15\lib\x86\SDL.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 libFLAC-8.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 libmikmod-2.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 libogg-0.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 libvorbis-0.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 libvorbisfile-3.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 SDL-mixer.dll Debug
+copy SDL_mixer-1.2.12\lib\x86 smpeg.dll Debug</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>required to properly link to SDL</Message>
@@ -94,7 +101,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
