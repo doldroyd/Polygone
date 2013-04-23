@@ -3,11 +3,12 @@
 
 class Engine;
 
-class Component{};
+class Component {
+};
 
 class System {
 	public:
-		System(Engine *e);
+		System(Engine* e);
 		~System();
 
 		virtual void init() = 0;
@@ -23,5 +24,7 @@ class System {
 	protected:
 		Engine* e;
 };
+
+#include "Engine.h"
 
 #endif //SYSTEM_H

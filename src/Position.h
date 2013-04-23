@@ -1,10 +1,9 @@
 #ifndef POSITION_H
-#define POSITION_H
+//#define POSITION_H
 
-#include <SDL.h>
 #include <map>
+#include <SDL.h>
 
-#include "Engine.h"
 #include "System.h"
 
 class PositionComponent : public Component
