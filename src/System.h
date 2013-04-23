@@ -1,11 +1,13 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+class Engine;
+
 class Component;
 
 class System {
 	public:
-		System(Engine* e);
+		System(Engine *e);
 		~System();
 
 		virtual void init() = 0;
@@ -14,10 +16,6 @@ class System {
 
 		virtual Component* getEntity(int EntityID) = 0;
 		virtual bool removeEntity(int EntityID) = 0;
-
-		bool operator<(const System& other) const {
-			return priority < other.priority;
-		}
 
         const std::string name;
         const int priority;
