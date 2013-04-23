@@ -14,7 +14,6 @@ bool Render::Init(void) {
 	SDL_Surface *screen = NULL;
 
 	//playerentity
-	//backgroundentity
 	//wallentity
 	//courseentity
 	//orbentity
