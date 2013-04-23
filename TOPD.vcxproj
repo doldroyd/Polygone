@@ -23,7 +23,6 @@
     <ClInclude Include="src\Position.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\Sound.h" />
-    <ClInclude Include="src\System.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{534CB1D7-23DB-4DA8-A786-397BBA9F14CF}</ProjectGuid>
