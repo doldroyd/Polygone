@@ -1,7 +1,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-class Engine;
+#include "Engine.h"
 
 class Component {
 };
@@ -24,7 +24,5 @@ class System {
 	protected:
 		Engine* e;
 };
-
-#include "Engine.h"
 
 #endif //SYSTEM_H
