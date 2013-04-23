@@ -12,7 +12,6 @@ class System {
 		virtual void update(unsigned int delay) = 0;
 		virtual void cleanup() = 0;
 
-		virtual Component* addEntity(int EntityID) = 0;
 		virtual Component* getEntity(int EntityID) = 0;
 		virtual bool removeEntity(int EntityID) = 0;
 
@@ -20,10 +19,10 @@ class System {
 			return priority < other.priority;
 		}
 
-        static const std::string name;
+        const std::string name;
+        const int priority;
 
 	protected:
-		int priority;
 		Engine* e;
 };
 
