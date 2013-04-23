@@ -13,9 +13,8 @@ PositionComponent* PositionSystem::getEntity(int EntityID){
 }
 
 
-virtual bool removeEntity(int EntityID);
-
-
-
-
-mymap.erase ('c'); 
+virtual bool removeEntity(int EntityID){
+	bool retval;
+	reval=((1==position.erase(EntityID))?true:false;
+	return retval;
+} 

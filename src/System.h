@@ -3,7 +3,7 @@
 
 class Engine;
 
-class Component;
+class Component{};
 
 class System {
 	public:
