@@ -13,10 +13,10 @@ Input::Key(void){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP: position.y += 5; break; //Need correct position component
-			case SDLK_DOWN: position.y -= 5; break; //Need correct position component
-			case SDLK_LEFT: position.x -= 5; break; //Need correct position component
-			case SDLK_RIGHT: position.x += 5; break; //Need correct position component
+			case SDLK_UP: position.y += 5; break; 
+			case SDLK_DOWN: position.y -= 5; break;
+			case SDLK_LEFT: position.x -= 5; break;
+			case SDLK_RIGHT: position.x += 5; break;
 			default : ;
 		}
 	}
