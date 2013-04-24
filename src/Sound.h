@@ -7,10 +7,23 @@
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include <map>
+#include <string>
+
+#include "System.h"
+
+#define SOUND_PRIORITY 6 //placeholder
+#define SOUND_NAME "Sound" //Placeholder
+
+class SoundComponent : public Component
+{
+  public:
+    std::string soundname;
+    int channel;
+};
 
 class SoundSystem : public System
 {
-  SoundSystem(engine* e): System( e ){ System::priority = SOUND_PRIORITY; music = NULL; sound1 = NULL; sound2 = NULL; sound3 = NULL;
+    SoundSystem(): System(SOUND_PRIORITY, SOUND_NAME) {  music = NULL; sound1 = NULL; sound2 = NULL; sound3 = NULL;
                                         sound4 = NULL; sound5 = NULL; sound6 = NULL; sound7 = NULL; sound8 = NULL; sound9 = NULL; soundn = NULL;/*all the sounds are null*/ }
   Mix_Music* music;
   Mix_Chunk* sound1;
@@ -25,18 +38,12 @@ class SoundSystem : public System
   Mix_Chunk* soundn;
 	  	  
   bool init();
-  void update(std::chrono::duration time);
+  void update(unsigned int delay);
   void cleanup();
   Component* getEntity(int EntityID);
-  map<int, SoundComponent> entities;
+  std::map<int, SoundComponent> entities;
 
   bool removeEntity(int EntityID);
-};
-
-class SoundComponent : public Component
-{
-  string soundname;
-  int channel;
 };
 
 #endif //SOUND_H

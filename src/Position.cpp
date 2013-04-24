@@ -1,9 +1,11 @@
 #include "Position.h"
 
-PositionSystem::PositionSystem(Engine* e){}
+PositionSystem::PositionSystem(): System(POSITION_PRIORITY, POSITION_NAME) {}
 PositionSystem::~PositionSystem(){}
 
-void PositionSystem::init(){}
+bool PositionSystem::init() {
+    return true;
+}
 void PositionSystem::update(unsigned int delay){}
 void PositionSystem::cleanup(){}
 
@@ -16,6 +18,6 @@ PositionComponent* PositionSystem::getEntity(int EntityID){
 
 bool PositionSystem::removeEntity(int EntityID){
 	bool retval;
-	retval=((1==position.erase(EntityID))?true:false;
+	retval=(1==position.erase(EntityID))?true:false;
 	return retval;
 } 
