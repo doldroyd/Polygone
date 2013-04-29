@@ -1,5 +1,5 @@
 #ifndef POSITION_H
-//#define POSITION_H
+#define POSITION_H
 
 #include <map>
 #include <SDL.h>
@@ -31,4 +31,6 @@ class PositionSystem : public System
     const std::string name;
     const int priority;
 };
+
+
 #endif //POSITION_H

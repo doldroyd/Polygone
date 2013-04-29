@@ -1,20 +1,20 @@
 #include "Position.h"
-PositionSystem(Engine* e){}
-~PositionSystem(){}
+PositionSystem::PositionSystem(Engine* e){}
+PositionSystem::~PositionSystem(){}
 
-void init(){}
-void update(unsigned int delay){}
-void cleanup(){}
+void PositionSystem::init(){}
+void PositionSystem::update(unsigned int delay){}
+void PositionSystem::cleanup(){}
 
 
 PositionComponent* PositionSystem::getEntity(int EntityID){
-	PositionComponent* retval = &position[EntityID];
+	PositionComponent* retval = &(position[EntityID]);
 	return retval;
 }
 
 
-virtual bool removeEntity(int EntityID){
+bool PositionSystem::removeEntity(int EntityID){
 	bool retval;
-	reval=((1==position.erase(EntityID))?true:false;
+	retval=((1==position.erase(EntityID))?true:false);
 	return retval;
 } 
