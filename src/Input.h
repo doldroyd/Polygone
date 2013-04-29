@@ -14,5 +14,7 @@ class Input{
 
 		Key();
 		Mouse();
+
+		int mx, my;
 };
 #endif

@@ -1,17 +1,15 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-class Engine;
-
 class Component {
 };
 
 class System {
 	public:
-		System(Engine* e);
-		~System();
+        System(const int& p, const std::string& n): priority(p), name(n) {}
+        ~System() {}
 
-		virtual void init() = 0;
+		virtual bool init() = 0;
 		virtual void update(unsigned int delay) = 0;
 		virtual void cleanup() = 0;
 
@@ -21,10 +19,6 @@ class System {
         const std::string name;
         const int priority;
 
-	protected:
-		Engine* e;
 };
-
-#include "Engine.h"
 
 #endif //SYSTEM_H
