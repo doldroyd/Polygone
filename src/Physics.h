@@ -7,8 +7,12 @@
 #include "System.h"
 #include "Position.h"
 
+#define PHYSICS_PRIORITY 2 //placeholder
+#define PHYSICS_NAME "Physics" //placeholder
+
 class PhysicsComponent : public Component
 {
+public:
   PositionComponent* positionCom;
   int xv, yv;
 };
@@ -19,18 +23,15 @@ class PhysicsSystem : public System
     std::map<int, PhysicsComponent> physics;
   
   public:
-    PhysicsSystem(Engine* e);
+    PhysicsSystem();
     ~PhysicsSystem();
 
-    virtual void init();
+    virtual bool init();
     virtual void update(unsigned int delay);
     virtual void cleanup();
 
     virtual PhysicsComponent* getEntity(int EntityID);
     virtual bool removeEntity(int EntityID);
-
-    const std::string name;
-    const int priority;
 };
 
 

@@ -11,6 +11,7 @@
 
 class PositionComponent : public Component
 {
+public:
   int x, y, oldx, oldy;
 };
 
