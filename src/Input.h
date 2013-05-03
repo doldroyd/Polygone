@@ -8,18 +8,15 @@
 #include "Position.h"
 #include "Physics.h"
 
-#define INPUT_PRIORITY
-#define INPUT_NAME "Input"
 class InputComponent : public Component
 {
 	PhysicsComponent* pyhsicsCom;
-	int mx, my;
 };
 
 class InputSystem : public System
 {
 	public:
-
+		int mx, my;
 		InputSystem();
 		~InputSystem();
 
@@ -29,6 +26,5 @@ class InputSystem : public System
 		virtual InputComponent* getEntity(int EntityID);
 		virtual bool removeEntity(int EntityID);
 
-		void update(unsigned int delay);
 };
 #endif

@@ -6,8 +6,8 @@
 
 #include "System.h"
 
-#define POSITION_PRIORITY 2 //placeholder
-#define POSITION_NAME "Player Status"//placeholder
+#define PLAYERSTATUS_PRIORITY 3 //placeholder
+#define PLAYERSTATUS_NAME "Player Status"//placeholder
 
 class PlayerStatusComponent : public Component
 {

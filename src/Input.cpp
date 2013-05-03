@@ -1,6 +1,6 @@
 #include "Input.h"
 
-InputSystem::InputSystem(): System(INPUT_PRIORITY, INPUT_NAME) {}
+InputSystem::InputSystem() : System() {}
 InputSystem::~InputSystem(){}
 
 
@@ -37,8 +37,13 @@ void InputSystem::update(unsigned int delay){
 
 	//While the mouse is moving, constantly get its position
 	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
-		mx = event.motion.mx;
-		my = event.motion.my;
+		mx = event.motion.x;
+		my = event.motion.y;
+		//If in game, set main character entity's coordinates as mouse coordinates
+		//if (game == running){
+		//	position.x = mx;
+		//	position.y = my;
+		//}
 	}
 
 	//While a mouse button is pressed
@@ -47,8 +52,8 @@ void InputSystem::update(unsigned int delay){
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
-            mx = event.button.mx;
-            my = event.button.my;
+            mx = event.button.x;
+            my = event.button.y;
         }
     }
 
@@ -58,11 +63,11 @@ void InputSystem::update(unsigned int delay){
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
-            mx = event.button.mx;
-            my = event.button.my;
+            mx = event.button.x;
+            my = event.button.y;
 
             //If the mouse is over the button
-           // if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
+            //if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
             //{
             //}
         }
