@@ -7,10 +7,10 @@ void PhysicsSystem::init(){}
 void PhysicsSystem::update(unsigned int delay) {
 	for(auto physics : PhysicsComponent)
 	{
-		PositionComponent* positionCom.oldx = positionCom.x;
-		PositionComponent* positionCom.oldy = positionCom.y;
-		PositionComponent* positionCom.x = positionCom.x+xv*delay;
-		PositionComponent* positionCom.y = positionCom.y+yv*delay;
+		/* PositionComponent* */ physics.positionCom.oldx = positionCom.x;
+		/* PositionComponent* */ physics.positionCom.oldy = positionCom.y;
+		/* PositionComponent* */ physics.positionCom.x = positionCom.x+physics.xv*delay;
+		/* PositionComponent* */ physics.positionCom.y = positionCom.y+physics.yv*delay;
 	}
 }
 void cleanup(){}
@@ -22,7 +22,7 @@ PhysicsComponent* PhysicsSystem::getEntity(int EntityID){
 	//insert
 	bool newInsert = physics.insert(EntityID);
 	if(newInsert==false){
-		physics.positionCom = NULL;//PositionSystem::getEntity(EntityID);
+		physics.positionCom = PositionSystem::getEntity(EntityID);
 
 	}
 	PhysicsComponent* retval = &(physics[EntityID]);
