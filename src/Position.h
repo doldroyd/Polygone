@@ -32,4 +32,6 @@ class PositionSystem : public System
     virtual bool removeEntity(int EntityID);
 
 };
+
+
 #endif //POSITION_H
