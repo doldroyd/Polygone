@@ -6,15 +6,29 @@
 #include "System.h"
 
 #include "Position.h"
+#include "Physics.h"
 
-class Input{
+#define INPUT_PRIORITY
+#define INPUT_NAME "Input"
+class InputComponent : public Component
+{
+	PhysicsComponent* pyhsicsCom;
+	int mx, my;
+};
+
+class InputSystem : public System
+{
 	public:
-		Input();
-		~Input();
 
-		Key();
-		Mouse();
+		InputSystem();
+		~InputSystem();
 
-		int mx, my;
+		virtual void update(unsigned int delay);
+		virtual void cleanup();
+
+		virtual InputComponent* getEntity(int EntityID);
+		virtual bool removeEntity(int EntityID);
+
+		void update(unsigned int delay);
 };
 #endif

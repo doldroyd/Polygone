@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Physics.cpp" />
     <ClCompile Include="src\PlayerStatus.cpp" />
@@ -20,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Physics.h" />
     <ClInclude Include="src\PlayerStatus.h" />
     <ClInclude Include="src\Position.h" />

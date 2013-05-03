@@ -1,39 +1,49 @@
 #include "Input.h"
 
-Input::Input(void){
+InputSystem::InputSystem(): System(INPUT_PRIORITY, INPUT_NAME) {}
+InputSystem::~InputSystem(){}
 
-}
 
-Input::Input(~void){
-}
-
-Input::Key(void){
+void InputSystem::update(unsigned int delay){
+	
+	SDL_Event event;
+	SDL_PumpEvents();
+	
 	//While a key is pressed
-	while(event.type == SDL_KEYDOWN){
+	while(SDL_PeepEvents( &event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_KEYDOWN))){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP: position.y += 5; break; 
-			case SDLK_DOWN: position.y -= 5; break;
-			case SDLK_LEFT: position.x -= 5; break;
-			case SDLK_RIGHT: position.x += 5; break;
+			case SDLK_UP:  ; break; 
+			case SDLK_DOWN: ; break;
+			case SDLK_LEFT: ; break;
+			case SDLK_RIGHT: ; break;
 			default : ;
 		}
 	}
-}
 
-Input::Mouse(void){
+	//While a key is released
+	while(SDL_PeepEvents( &event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_KEYUP))){
+		switch( event.key.keysym.sym )
+		{
+			//For each key, an action respectively
+			case SDLK_UP:  ; break; 
+			case SDLK_DOWN: ; break;
+			case SDLK_LEFT: ; break;
+			case SDLK_RIGHT: ; break;
+			default : ;
+		}
+	}
+
 	//While the mouse is moving, constantly get its position
-	while(event.type == SDL_MOUSEMOTION)
-	{
+	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
 		mx = event.motion.mx;
 		my = event.motion.my;
 	}
 
 	//While a mouse button is pressed
-	while(event.type == SDL_MOUSEBUTTONDOWN )
-    {
-        //If the left mouse button was pressed
+	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEBUTTONDOWN))){
+		//If the left mouse button was pressed
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
@@ -41,9 +51,9 @@ Input::Mouse(void){
             my = event.button.my;
         }
     }
-	    //If a mouse button was released
-    if( event.type == SDL_MOUSEBUTTONUP )
-    {
+
+	//If a mouse button was released
+	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEBUTTONUP))){
         //If the left mouse button was released
         if( event.button.button == SDL_BUTTON_LEFT )
         {
