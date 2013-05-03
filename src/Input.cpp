@@ -1,22 +1,24 @@
 #include "Input.h"
 
-Input::Input(void){
+InputSystem::InputSystem(): System(INPUT_PRIORITY, INPUT_NAME) {}
+InputSystem::~InputSystem(){}
 
-}
 
-Input::Input(~void){
-}
+void InputSystem::update(unsigned int delay){
 
-Input::Key(void){
+	SDL_PumpEvents();
+	//probably still have this wrong v.v I'm a failure lol
+	SDL_PeepEvents( events, 10, SDL_GETEVENT, mask);
+
 	//While a key is pressed
 	while(event.type == SDL_KEYDOWN){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP: position.y += 5; break; 
-			case SDLK_DOWN: position.y -= 5; break;
-			case SDLK_LEFT: position.x -= 5; break;
-			case SDLK_RIGHT: position.x += 5; break;
+			case SDLK_UP: ; break; 
+			case SDLK_DOWN: ; break;
+			case SDLK_LEFT: ; break;
+			case SDLK_RIGHT: ; break;
 			default : ;
 		}
 	}

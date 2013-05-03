@@ -6,15 +6,34 @@
 #include "System.h"
 
 #include "Position.h"
+#include "Physics.h"
 
-class Input{
+#define INPUT_PRIORITY
+#define INPUT_NAME "Input"
+class InputComponent : public Component
+{
+	PhysicsComponent* pyhsicsCom;
+};
+
+class InputSystem : public System
+{
 	public:
+		//not sure if this is correct
+		SDL_Event *events;
+		int numevents;
+		SDL_eventaction action;
+		Uint32 mask;
+		///////////////////////////
+
 		Input();
 		~Input();
 
-		Key();
-		Mouse();
+		virtual void update(unsigned int delay);
+		virtual void cleanup();
 
-		int mx, my;
+		virtual InputComponent* getEntity(int EntityID);
+		virtual bool removeEntity(int EntityID);
+
+		void update(unsigned int delay);
 };
 #endif
