@@ -13,17 +13,12 @@
 class InputComponent : public Component
 {
 	PhysicsComponent* pyhsicsCom;
+	int mx, my;
 };
 
 class InputSystem : public System
 {
 	public:
-		//not sure if this is correct
-		SDL_Event *events;
-		int numevents;
-		SDL_eventaction action;
-		Uint32 mask;
-		///////////////////////////
 
 		InputSystem();
 		~InputSystem();
