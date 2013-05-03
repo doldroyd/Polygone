@@ -6,7 +6,12 @@ PositionSystem::~PositionSystem(){}
 bool PositionSystem::init() {
     return true;
 }
-void PositionSystem::update(unsigned int delay){}
+void PositionSystem::update(unsigned int delay){
+    for(auto p : position) {
+        p.second.oldx = p.second.x;
+        p.second.oldy = p.second.oldy;
+    }
+}
 void PositionSystem::cleanup(){}
 
 
@@ -15,6 +20,13 @@ PositionComponent* PositionSystem::getEntity(int EntityID){
 	return retval;
 }
 
+void PositionSystem::loadEntity(int EntityID, const YAML::Node &node) {
+    PositionComponent *c = getEntity(EntityID);
+    node["x"] >> c->x;
+    node["y"] >> c->y;
+    c->oldx = c->x;
+    c->oldy = c->y;
+}
 
 bool PositionSystem::removeEntity(int EntityID){
 	bool retval;

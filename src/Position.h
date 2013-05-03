@@ -4,14 +4,15 @@
 #include <map>
 #include <SDL.h>
 
+
 #include "System.h"
 
 #define POSITION_PRIORITY 1 //placeholder
 #define POSITION_NAME "Position" //placeholder
 
-class PositionComponent : public Component
-{
-  int x, y, oldx, oldy;
+class PositionComponent : public Component {
+    public:
+        int x, y, oldx, oldy;
 };
 
 
@@ -29,6 +30,7 @@ class PositionSystem : public System
     virtual void cleanup();
 
     virtual PositionComponent* getEntity(int EntityID);
+    virtual void loadEntity(int EntityID, const YAML::Node &node);
     virtual bool removeEntity(int EntityID);
 
 };
