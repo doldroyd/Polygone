@@ -1,16 +1,18 @@
 #include "Physics.h"
 #include "Position.h"
-PhysicsSystem::PhysicsSystem(Engine* e){}
+#include "Engine.h"
+
+PhysicsSystem::PhysicsSystem(): System(PHYSICS_PRIORITY, PHYSICS_NAME){}
 PhysicsSystem::~PhysicsSystem(){}
 
-void PhysicsSystem::init(){}
+bool PhysicsSystem::init(){
+	return true;
+}
 void PhysicsSystem::update(unsigned int delay) {
-	for(auto physics : PhysicsComponent)
+	for(auto p : physics)
 	{
-		/* PositionComponent* */ physics.positionCom.oldx = positionCom.x;
-		/* PositionComponent* */ physics.positionCom.oldy = positionCom.y;
-		/* PositionComponent* */ physics.positionCom.x = positionCom.x+physics.xv*delay;
-		/* PositionComponent* */ physics.positionCom.y = positionCom.y+physics.yv*delay;
+		p.second.positionCom->x = p.second.positionCom->x + p.second.xv*delay;
+		p.second.positionCom->y = p.second.positionCom->y + p.second.yv*delay;
 	}
 }
 void cleanup(){}
@@ -20,14 +22,16 @@ void cleanup(){}
 PhysicsComponent* PhysicsSystem::getEntity(int EntityID){
 
 	//insert
-	bool newInsert = physics.insert(EntityID);
-	if(newInsert==false){
-		physics.positionCom = PositionSystem::getEntity(EntityID);
-
+    auto i = physics.find(EntityID);
+	if(i == physics.end()){
+		physics[EntityID].positionCom = (PositionComponent*) Engine::instance().getSystem(POSITION_NAME)->getEntity(EntityID);
 	}
 	PhysicsComponent* retval = &(physics[EntityID]);
 	return retval;
 }
+
+
+
 bool PhysicsSystem::removeEntity(int EntityID){
 	bool retval;
 	retval=((1==physics.erase(EntityID))?true:false);

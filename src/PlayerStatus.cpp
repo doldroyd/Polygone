@@ -1,6 +1,6 @@
 #include "PlayerStatus.h"
 
-PlayerStatusSystem::PlayerStatusSystem(): System(POSITION_PRIORITY, POSITION_NAME){}
+PlayerStatusSystem::PlayerStatusSystem(): System(PLAYERSTATUS_PRIORITY, PLAYERSTATUS_NAME){}
 PlayerStatusSystem::~PlayerStatusSystem(){}
 
 bool PlayerStatusSystem::init(int EntityID){
@@ -27,7 +27,7 @@ void PlayerStatusSystem::colorShift(int colorMod, int EntityID){
 }
 void PlayerStatusSystem::scrollShift(int scrollMod, int EntityID){
 	characterStatus[EntityID].scrollSpeed+=scrollMod;
-	characterStatus[EntityID].reverse=(characterStatus[EntityID].scrollSpeed>=0)
+	characterStatus[EntityID].reverse=(characterStatus[EntityID].scrollSpeed>=0);
 }
 
 void PlayerStatusSystem::cleanup(){}
