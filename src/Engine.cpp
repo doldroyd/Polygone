@@ -1,9 +1,6 @@
 #include "Engine.h"
 #include "System.h"
 
-Engine::Engine() {
-}
-
 Engine::~Engine() {
 }
 
