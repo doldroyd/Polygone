@@ -25,8 +25,8 @@ class InputSystem : public System
 		Uint32 mask;
 		///////////////////////////
 
-		Input();
-		~Input();
+		InputSystem();
+		~InputSystem();
 
 		virtual void update(unsigned int delay);
 		virtual void cleanup();
