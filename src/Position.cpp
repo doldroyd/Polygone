@@ -18,6 +18,6 @@ PositionComponent* PositionSystem::getEntity(int EntityID){
 
 bool PositionSystem::removeEntity(int EntityID){
 	bool retval;
-	retval=((1==position.erase(EntityID))?true:false);
+	retval=(1==position.erase(EntityID));
 	return retval;
 } 
