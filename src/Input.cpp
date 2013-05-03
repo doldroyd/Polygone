@@ -1,6 +1,6 @@
 #include "Input.h"
 
-InputSystem::InputSystem() : System() {}
+InputSystem::InputSystem() : System(INPUT_PRIORITY, INPUT_NAME) {}
 InputSystem::~InputSystem(){}
 
 

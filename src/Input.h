@@ -8,6 +8,9 @@
 #include "Position.h"
 #include "Physics.h"
 
+#define INPUT_PRIORITY 3 //placeholder
+#define INPUT_NAME "Input" //placeholder
+
 class InputComponent : public Component
 {
 	PhysicsComponent* pyhsicsCom;
