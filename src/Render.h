@@ -27,6 +27,7 @@ class RenderSystem : public System
 	std::vector<System*> layers;
 	SDL_Surface *screen;
 	SDL_Surface *background;
+	int cameraX,cameraY;
 
 	public:
 		RenderSystem();

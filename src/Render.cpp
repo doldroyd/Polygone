@@ -58,12 +58,15 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 
 bool RenderSystem::init(void) {
 	//Start SDL 
-	  //SDL_Init( SDL_INIT_EVERYTHING );
+	SDL_Init( SDL_INIT_VIDEO);
 	//Set up screen 
 	screen = SDL_SetVideoMode( 640, 480, 32, SDL_SWSURFACE );
 
 	//Load background image
 	background = load_image( "background.png" );
+
+	cameraX = 0;
+	cameraY = 0;
 
 	return true;
 
@@ -71,18 +74,22 @@ bool RenderSystem::init(void) {
 void RenderSystem::update(unsigned int delay) {
 	//The offsets of the background 
 	int bgX = 0, bgY = 0;
-	
-	//Scroll background 
+
+	/*//Scroll background 
 	bgX -= 2; 
 
 	//If the background has gone too far 
 	if( bgX <= -background->w ) { 
 		//Reset the offset 
 		bgX = 0;
-	}
+	} */
+
 	//Apply the background to the screen 
-	apply_surface( bgX, bgY, background, screen );
-	apply_surface( bgX + background->w, bgY, background, screen );
+	apply_surface( bgX - cameraX, cameraY, background, screen );
+	//apply_surface( bgX + background->w, bgY, background, screen );
+
+	//Move camera 
+	cameraX += 1; 
 
 	/*for(auto p : render)
 	{
