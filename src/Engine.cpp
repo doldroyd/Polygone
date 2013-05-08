@@ -9,7 +9,15 @@ bool compareSystem(System *i, System *j) {
 }
 
 bool Engine::init() {
-    return SDL_Init(0) == 0;
+    if(SDL_Init(0) != 0) {
+        return false;
+    }
+    for(auto s : systems) {
+        if(!s->init()) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Engine::cleanup() {
