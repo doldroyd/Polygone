@@ -3,6 +3,7 @@
 
 #include <map>
 #include "SDL.h"
+#include "SDL_image.h"
 
 #include "System.h"
 #include "Physics.h"
