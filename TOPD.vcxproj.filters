@@ -42,7 +42,7 @@
     <ClCompile Include="src\PlayerStatus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render.cpp">
+    <ClCompile Include="src\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="src\PlayerStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render.h">
+    <ClInclude Include="src\Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
