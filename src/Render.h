@@ -16,7 +16,8 @@ class RenderComponent : public Component
 {
 public:
 	PositionComponent* positionCom;
-	SDL_Surface *surface = NULL;
+	SDL_Surface *surface;
+	int layer;
 };
 
 class RenderSystem : public System
@@ -24,11 +25,12 @@ class RenderSystem : public System
 	private:
     std::map<int, RenderComponent> render;
 	std::vector<System*> layers;
-	SDL_Surface *screen = NULL;
+	SDL_Surface *screen;
+	SDL_Surface *background;
 
 	public:
-		Render();
-		~Render();
+		RenderSystem();
+		~RenderSystem();
 
 		bool registerLayer(System &s);
 
@@ -37,6 +39,7 @@ class RenderSystem : public System
 		virtual void cleanup();
 
 		virtual RenderComponent* getEntity(int EntityID);
+		virtual void loadEntity(int EntityID, const YAML::Node &node);
 		virtual bool removeEntity(int EntityID);
 };
 
