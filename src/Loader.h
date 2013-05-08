@@ -11,7 +11,7 @@ public:
     Loader(void);
     ~Loader(void);
 
-    static void load(std::string name);
+    static void load(std::string name, Engine *e);
 };
 
 #endif LOADER_H

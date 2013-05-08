@@ -6,16 +6,28 @@
 RenderSystem::RenderSystem(): System(RENDER_PRIORITY, RENDER_NAME){}
 RenderSystem::~RenderSystem(void) {}
 
+bool compareLayer(System *i, System *j) {
+    return i->priority < j->priority;
+}
+
+bool RenderSystem::registerLayer(System &s) {
+	std::pair<std::map<std::string, System*>::iterator, bool> result;
+	result = render.insert(std::make_pair(s.name, &s));
+	if(!result.second) {
+		return false;
+	}
+	layers.push_back(&s);
+	std::sort(layers.begin(), layers.end(), compareLayer);
+	return true;
+}
+
 bool RenderSystem::init(void) {
 	//Start SDL 
 	SDL_Init( SDL_INIT_EVERYTHING );
-	
-	//The surfaces - add entities as needed
-	SDL_Surface *foreground = NULL;
-	 //SDL_Surface *background = NULL;
-	SDL_Surface *screen = NULL;
+	//Set up screen 
+	screen = SDL_SetVideoMode( 640, 480, 32, SDL_SWSURFACE );
 
-	//Load images - one for each entity depending on entity id
+	//Load image function
 	SDL_Surface *load_image( std::string filename ) { 
 		//Temporary storage for the image that's loaded 
 		SDL_Surface* loadedImage = NULL; 
@@ -36,24 +48,49 @@ bool RenderSystem::init(void) {
 		return optimizedImage; 
 	}
 
+	//Load the images-one of these for each entity
+	 playerentity = load_image( "player.png" );
+	 //playerdeath = load_image("playerKO.png");
+	 //courseentity = load_image( ".png" );
+	 background = load_image( "background.png" );
+
+	//The offsets of the background 
+	int bgX = 0, bgY = 0;
+
+	//Apply to surface function
+	void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination ) { 
+		//Make a temporary rectangle to hold the offsets 
+		SDL_Rect offset; 
+		//Give the offsets to the rectangle 
+		offset.x = x; 
+		offset.y = y;
+		
+		//Blit the surface
+		SDL_BlitSurface( source, NULL, destination, &offset );
+	}
+
 	return true;
 }
 
 void RenderSystem::update(unsigned int delay) {
+	//Scroll background 
+	bgX -= 2; 
+
+	//If the background has gone too far 
+	if( bgX <= -background->w ) { 
+		//Reset the offset 
+		bgX = 0;
+
+	//Apply the background to the screen 
+	apply_surface( bgX, bgY, background, screen );
+	apply_surface( bgX + background->w, bgY, background, screen );
+
 	for(auto p : render)
 	{
-		p.second.positionCom->x = p.second.positionCom->x + p.second.xv*delay;
-		p.second.positionCom->y = p.second.positionCom->y + p.second.yv*delay;
+		apply_surface( p.second.positionCom->x, p.second.positionCom->y, playerentity, surface );
+		//p.second.positionCom->x
+		//p.second.positionCom->y
 	}
-
-void RenderSystem::load() {
-	//Load the images-one of these for each entity
-	 //playerentity = load_image( ".png" );
-	 //playerdeath = load_image(".png");
-	 //courseentity = load_image( ".png" );
-	background = load_image( "background.bmp" );
-
-}
 
 RenderComponent* RenderSystem::getEntity(int EntityID){
 
@@ -71,50 +108,6 @@ bool RenderSystem::removeEntity(int EntityID){
 	bool retval;
 	retval=((1==render.erase(EntityID))?true:false);
 	return retval;
-}
-
-void RenderSystem::run() {
-	RenderComponent *r;
-	if(!r.Init()) {
-		return -1;
-	}
-	r.load;
-
-	//The offsets of the background 
-	int bgX = 0, bgY = 0;
-
-	//Scroll background 
-	bgX -= 2; 
-
-	//If the background has gone too far 
-	if( bgX <= -background->w ) { 
-		//Reset the offset 
-		bgX = 0; 
-	}
-	
-	//Apply images to surface (screen)
-		void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination ) { 
-			//Make a temporary rectangle to hold the offsets 
-			SDL_Rect offset; 
-			//Give the offsets to the rectangle 
-			offset.x = x; 
-			offset.y = y;
-
-			//Blit the surface-one of these for each entity
-			SDL_BlitSurface( source, NULL, destination, &offset );
-		}
-
-	//Apply the background to the screen 
-	apply_surface( bgX, bgY, background, screen ); 
-	apply_surface( bgX + background->w, bgY, background, screen );
-
-	//Apply entities to screen-one of these for each entity
-	  //apply_surface( entityposition.x, entityposition.y, blankentity, screen );
-
-	//Update the screen 
-	if( SDL_Flip( screen ) == -1 ) { 
-		return 1; 
-	}
 }
 
 void cleanup(){}

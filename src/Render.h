@@ -15,23 +15,25 @@
 class RenderComponent : public Component
 {
 public:
-  PositionComponent* positionCom;
-  int xv, yv;
+	PositionComponent* positionCom;
+	SDL_Surface *surface = NULL;
 };
 
 class RenderSystem : public System
 {
 	private:
     std::map<int, RenderComponent> render;
+	std::vector<System*> layers;
+	SDL_Surface *screen = NULL;
 
 	public:
 		Render();
 		~Render();
 
+		bool registerLayer(System &s);
+
 		virtual bool init();
 		virtual void update(unsigned int delay);
-		virtual void load();
-		virtual void run();
 		virtual void cleanup();
 
 		virtual RenderComponent* getEntity(int EntityID);

@@ -16,7 +16,7 @@ class System {
 		virtual void cleanup() = 0;
 
 		virtual Component* getEntity(int EntityID) = 0;
-        virtual void loadEntity(int EntityID, const YAML::Node &node) = 0;
+        virtual void loadEntity(int EntityID, const YAML::Node &node);
 		virtual bool removeEntity(int EntityID) = 0;
 
         const std::string name;

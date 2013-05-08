@@ -2,7 +2,7 @@
 #define INPUT_H
 
 #include <SDL.h>
-
+#include "Engine.h"
 #include "System.h"
 
 #include "Position.h"
@@ -13,13 +13,16 @@
 
 class InputComponent : public Component
 {
-	PhysicsComponent* pyhsicsCom;
+	public:
+		PhysicsComponent* physicsCom;
 };
 
 class InputSystem : public System
 {
+	private:
+    std::map<int, InputComponent> input;
+
 	public:
-		int mx, my;
 		InputSystem();
 		~InputSystem();
 
