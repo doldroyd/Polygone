@@ -1,22 +1,20 @@
 #include "Render.h"
-//#include "Position.h"
+#include "Physics.h"
+#include "Position.h"
+#include "Engine.h"
 
-Render::~Render(void) {
-}
+RenderSystem::RenderSystem(): System(RENDER_PRIORITY, RENDER_NAME){}
+RenderSystem::~RenderSystem(void) {}
 
-bool Render::Init(void) {
+bool RenderSystem::init(void) {
 	//Start SDL 
 	SDL_Init( SDL_INIT_EVERYTHING );
 	
 	//The surfaces - add entities as needed
-	SDL_Surface *blankentity = NULL;
+	SDL_Surface *playerentity = NULL;
+	SDL_Surface *courseentity = NULL;
 	SDL_Surface *background = NULL;
 	SDL_Surface *screen = NULL;
-
-	//playerentity
-	//wallentity
-	//courseentity
-	//orbentity
 
 	//Load images - one for each entity depending on entity id
 	SDL_Surface *load_image( std::string filename ) { 
@@ -38,6 +36,37 @@ bool Render::Init(void) {
 		//Return the optimized image 
 		return optimizedImage; 
 	}
+
+	return true;
+}
+
+void RenderSystem::update(unsigned int delay) {
+	for(auto p : render)
+	{
+		p.second.positionCom->x = p.second.positionCom->x + p.second.xv*delay;
+		p.second.positionCom->y = p.second.positionCom->y + p.second.yv*delay;
+	}
+
+void RenderSystem::load() {
+	//Load the images-one of these for each entity
+	playerentity = load_image( ".png" );
+	playerdeath = load_image(".png");
+	courseentity = load_image( ".png" );
+	background = load_image( "background.png" );
+	
+	//Apply the background to the screen 
+	apply_surface( 0, 0, background, screen );
+
+}
+
+void RenderSystem::run() {
+	RenderComponent *r;
+	if(!r.Init()) {
+		return -1;
+	}
+	r.load;
+
+	
 	
 	//Apply images to surface (screen)
 		void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination ) { 
@@ -51,36 +80,31 @@ bool Render::Init(void) {
 			SDL_BlitSurface( source, NULL, destination, &offset );
 		}
 
-	running = true;
-	return true;
+	//Apply entities to screen-one of these for each entity
+	apply_surface( entityposition.x, entityposition.y, blankentity, screen );
+
+	//Update the screen 
+	if( SDL_Flip( screen ) == -1 ) { 
+		return 1; 
+	}
 }
 
-void Render::Load() {
-	//Load the images-one of these for each entity
-	blankentity = load_image( ".png" ); 
-	background = load_image( "background.png" );
-	
-	//Apply the background to the screen 
-	apply_surface( 0, 0, background, screen );
+void cleanup(){}
 
+RenderComponent* RenderSystem::getEntity(int EntityID){
+
+	//insert
+    auto i = render.find(EntityID);
+	if(i == render.end()){
+		render[EntityID].positionCom = (PositionComponent*) Engine::instance().getSystem(POSITION_NAME)->getEntity(EntityID);
+	}
+	RenderComponent* retval = &(render[EntityID]);
+	return retval;
 }
 
-void Render::Run() {
-	Render r;
-	if(!r.Init()) {
-		return -1;
-	}
-	r.Load;
 
-	while(running) {
-
-		//Apply entities to screen-one of these for each entity
-		apply_surface( entityposition.x, entityposition.y, blankentity, screen );
-
-		//Update the screen 
-		if( SDL_Flip( screen ) == -1 ) { 
-			return 1; 
-		}
-		
-	}
+bool RenderSystem::removeEntity(int EntityID){
+	bool retval;
+	retval=((1==render.erase(EntityID))?true:false);
+	return retval;
 }
