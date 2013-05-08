@@ -1,27 +1,38 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
+#include <map>
+#include <SDL.h>
 
-#include "SDL.h"
-
-#include "Engine.h"
 #include "System.h"
+#include "Position.h"
 
-class VelocityComponent : public Component
+#define PHYSICS_PRIORITY 2 //placeholder
+#define PHYSICS_NAME "Physics" //placeholder
+
+class PhysicsComponent : public Component
 {
-  int x, y;
+public:
+  PositionComponent* positionCom;
+  int xv, yv;
 };
 
-class Physics
+class PhysicsSystem : public System
 {
   private:
-
+    std::map<int, PhysicsComponent> physics;
+  
   public:
-  Physics(void);
-  ~Physics(void);
+    PhysicsSystem();
+    ~PhysicsSystem();
 
-void PositUpdate(deltaTime, int vx, int vy, ENTITY);
-}
+    virtual bool init();
+    virtual void update(unsigned int delay);
+    virtual void cleanup();
+
+    virtual PhysicsComponent* getEntity(int EntityID);
+    virtual bool removeEntity(int EntityID);
+};
 
 
 

@@ -1,28 +1,27 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "Engine.h"
+#include <yaml-cpp\yaml.h>
 
 class Component {
 };
 
 class System {
 	public:
-		System(Engine* e);
-		~System();
+        System(const int& p, const std::string& n): priority(p), name(n) {}
+        ~System() {}
 
-		virtual void init() = 0;
+		virtual bool init() = 0;
 		virtual void update(unsigned int delay) = 0;
 		virtual void cleanup() = 0;
 
 		virtual Component* getEntity(int EntityID) = 0;
+        virtual void loadEntity(int EntityID, const YAML::Node &node) = 0;
 		virtual bool removeEntity(int EntityID) = 0;
 
         const std::string name;
         const int priority;
 
-	protected:
-		Engine* e;
 };
 
 #endif //SYSTEM_H

@@ -15,8 +15,12 @@ class System;
 
 class Engine {
 	public:
-		Engine();
 		~Engine();
+
+        static Engine& instance() {
+            static Engine e;
+            return e;
+        }
 
         bool init();
         void cleanup();
@@ -31,6 +35,11 @@ class Engine {
 	private:
 		std::map<std::string, System*> systemDecoder;
 		std::vector<System*> systems;
+
+        //Singleton design pattern
+        Engine() {}
+        Engine(Engine const&);
+        void operator=(Engine const&);
 
 		bool running;
 		int nextEntity;

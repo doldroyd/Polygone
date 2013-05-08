@@ -2,6 +2,8 @@
 //implementation for the sound system
 //CS 397
 
+#include "Sound.h"
+
 bool SoundSystem::init()
 {
   if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
@@ -27,8 +29,6 @@ bool SoundSystem::init()
   }
   return true;
 }
-
-void update(std::chrono::duration time)
 
 void SoundSystem::cleanup()
 {
@@ -57,15 +57,15 @@ bool SoundSystem::removeEntity( int EntityID)
   return( entities.erase( EntityID ) > 0 ? true : false );
 }
 
-void SoundSystem::update(std::chrono::duration time)
+void SoundSystem::update(unsigned int delay)
 {
   while( entities.size() > 0 )
   {
-    Component tempComponent = entities.begin()->second); 
+    SoundComponent tempComponent = entities.begin()->second; 
 	if( tempComponent.soundname == "musicon" )
 	{
 	  //do music on things
-		if( Mix_PlayingMusix == 0 )
+		if( Mix_PlayingMusic == 0 )
 		{
 		  if( Mix_PlayMusic( music, -1 ) == -1 )
 		    return;
@@ -76,7 +76,7 @@ void SoundSystem::update(std::chrono::duration time)
 	if( tempComponent.soundname == "musicpause" )
 	{	 
 		//do music pause things
-		if( Mix_PlayingMusix == 0 )
+		if( Mix_PlayingMusic == 0 )
 		{
 		  if( Mix_PlayMusic( music, -1 ) == -1 )
 			  return;
@@ -102,6 +102,7 @@ void SoundSystem::update(std::chrono::duration time)
       //do music off things
       Mix_HaltMusic();
 	}
+    /* switch cannot use a string, removed for now
 	switch( tempComponent.soundname )
 	{
 	  case "sound1" : if( Mix_PlayChannel( tempComponent.channel, sound1, 0 ) ) == -1 )
@@ -134,6 +135,7 @@ void SoundSystem::update(std::chrono::duration time)
 	  case "soundn" : if( Mix_PlayChannel( tempComponent.channel, soundn, 0 ) ) == -1 )
 					    return;
 	}
+    */
 	entities.erase( entities.begin() );
   //get rid of this component / / get next component
   }

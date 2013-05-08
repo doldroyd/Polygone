@@ -11,15 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Group.cpp" />
+    <ClCompile Include="src\Loader.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Physics.cpp" />
+    <ClCompile Include="src\PlayerStatus.cpp" />
     <ClCompile Include="src\Position.cpp" />
     <ClCompile Include="src\Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Group.h" />
+    <ClInclude Include="src\Loader.h" />
     <ClInclude Include="src\Engine.h" />
+    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Physics.h" />
+    <ClInclude Include="src\PlayerStatus.h" />
     <ClInclude Include="src\Position.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\Sound.h" />
@@ -53,12 +61,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(ProjectDir)SDL_mixer-1.2.12\include;$(ProjectDir)yaml-cpp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(ProjectDir)SDL_mixer-1.2.12\lib\x86;$(ProjectDir)yaml-cpp\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)SDL-1.2.15\include;$(ProjectDir)SDL_mixer-1.2.12\include;$(ProjectDir)yaml-cpp\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)SDL-1.2.15\lib\x86;$(ProjectDir)SDL_mixer-1.2.12\lib\x86;$(ProjectDir)yaml-cpp\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -71,14 +79,16 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_mixer.lib;yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy SDL-1.2.15\lib\x86\SDL.dll Debug</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>required to properly link to SDL</Message>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,7 +104,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL.lib;SDLmain.lib;SDL_mixer.lib;yaml-cpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>

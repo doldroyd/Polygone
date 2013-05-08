@@ -4,11 +4,15 @@
 #include <map>
 #include <SDL.h>
 
+
 #include "System.h"
 
-class PositionComponent : public Component
-{
-  int x, y, oldx, oldy;
+#define POSITION_PRIORITY 1 //placeholder
+#define POSITION_NAME "Position" //placeholder
+
+class PositionComponent : public Component {
+    public:
+        int x, y, oldx, oldy;
 };
 
 
@@ -18,17 +22,18 @@ class PositionSystem : public System
     std::map<int, PositionComponent> position;
   
   public:
-    PositionSystem(Engine* e);
+    PositionSystem();
     ~PositionSystem();
 
-    virtual void init();
+    virtual bool init();
     virtual void update(unsigned int delay);
     virtual void cleanup();
 
     virtual PositionComponent* getEntity(int EntityID);
+    virtual void loadEntity(int EntityID, const YAML::Node &node);
     virtual bool removeEntity(int EntityID);
 
-    const std::string name;
-    const int priority;
 };
+
+
 #endif //POSITION_H
