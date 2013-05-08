@@ -13,13 +13,14 @@
 
 class InputComponent : public Component
 {
-	PhysicsComponent* pyhsicsCom;
+	public:
+		PhysicsComponent* pyhsicsCom;
+		int mx, my;
 };
 
 class InputSystem : public System
 {
 	public:
-		int mx, my;
 		InputSystem();
 		~InputSystem();
 
