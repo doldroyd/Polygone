@@ -1,4 +1,5 @@
 #include "Input.h"
+#include "Render.h"
 #include <iostream>
 
 InputSystem::InputSystem() : System(INPUT_PRIORITY, INPUT_NAME) {}
@@ -49,49 +50,52 @@ void InputSystem::update(unsigned int delay){
 			case SDLK_DOWN: input.begin()->second.physicsCom->yv -= .3; break;
 			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .2; break;
 			case SDLK_RIGHT: input.begin()->second.physicsCom->xv -= .5; break;
+			case SDLK_m: mouseenabled = !mouseenabled;
 			default : ;
 		}
 	}
 
-	//While the mouse is moving, constantly get its position
-	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
-		//if in game then set mouse offset as player entity
-		//if( game == running){
-			input.begin()->second.positionCom->x = event.motion.x;
-			input.begin()->second.positionCom->y = event.motion.y;
-		//}
-	}
-
-	//While a mouse button is pressed
-	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEBUTTONDOWN))){
-		//If the left mouse button was pressed
-        if( event.button.button == SDL_BUTTON_LEFT )
-        {
-			//If mouse offset is equal to the button offset, then do button down gif
-            //If(mx == button.x && my == button.y){
-			//	button down gif nonexistent at the moment
+	if(mouseenabled == true){
+		//While the mouse is moving, constantly get its position
+		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
+			//if in game then set mouse offset as player entity
+			//if( game == running){
+				input.begin()->second.positionCom->x = event.motion.x + *cameraX;
+				input.begin()->second.positionCom->y = event.motion.y;
 			//}
-        }
-    }
+		}
 
-	//If a mouse button was released
-	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEBUTTONUP))){
-        //If the left mouse button was released
-        if( event.button.button == SDL_BUTTON_LEFT )
-        {
-            //Get the mouse offsets
-            //mx = event.button.x;
-            //my = event.button.y;
+		//While a mouse button is pressed
+		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEBUTTONDOWN))){
+			//If the left mouse button was pressed
+			if( event.button.button == SDL_BUTTON_LEFT )
+			{
+				//If mouse offset is equal to the button offset, then do button down gif
+				//If(mx == button.x && my == button.y){
+				//	button down gif nonexistent at the moment
+				//}
+			}	
+		}
 
-            //If the mouse is over the button
-            //if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
-            //{
-            //}
-        }
-    }
+		//If a mouse button was released
+		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEBUTTONUP))){
+	        //If the left mouse button was released
+			if( event.button.button == SDL_BUTTON_LEFT )
+			{
+	            //Get the mouse offsets
+				//mx = event.button.x;
+				//my = event.button.y;
+	
+	            //If the mouse is over the button
+				//if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
+				//{
+				//}
+			}
+		}
+	}
 }
 
-void InputSystem::cleanup() {}
+void InputSystem::cleanup() {SDL_FreeCursor(cursor);}
 
 void InputSystem::loadEntity(int EntityID, const YAML::Node &node) {
     InputComponent *i = getEntity(EntityID);
@@ -99,7 +103,8 @@ void InputSystem::loadEntity(int EntityID, const YAML::Node &node) {
 }
 
 bool InputSystem::init() {
-	cursor = SDL_CreateCursor(NULL, NULL, 0,0,0,0);
-	SDL_SetCursor(cursor);
+	mouseenabled = false;
+	SDL_WM_GrabInput(SDL_GRAB_ON);
+	cameraX = &(((RenderSystem*) Engine::instance().getSystem(RENDER_NAME))->cameraX);
     return true;
 }
