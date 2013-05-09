@@ -1,4 +1,5 @@
 #include "Input.h"
+#include <iostream>
 
 InputSystem::InputSystem() : System(INPUT_PRIORITY, INPUT_NAME) {}
 InputSystem::~InputSystem(){}
@@ -9,6 +10,7 @@ InputComponent* InputSystem::getEntity(int EntityID){
     auto i = input.find(EntityID);
 	if(i == input.end()){
 		input[EntityID].physicsCom = (PhysicsComponent*) Engine::instance().getSystem(PHYSICS_NAME)->getEntity(EntityID);
+		input[EntityID].positionCom = (PositionComponent*) Engine::instance().getSystem(POSITION_NAME)->getEntity(EntityID);
 	}
 	InputComponent* retval = &(input[EntityID]);
 	return retval;
@@ -30,10 +32,10 @@ void InputSystem::update(unsigned int delay){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-		case SDLK_UP: input.begin()->second.physicsCom->yv += 5 ; break; 
-			case SDLK_DOWN:  input.begin()->second.physicsCom->yv -= 5 ; break;
-			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= 5 ; break;
-			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += 20 ; break;
+			case SDLK_UP: input.begin()->second.physicsCom->yv -= .009 ; std::cout<<"upsy daisy";break; 
+			case SDLK_DOWN:  input.begin()->second.physicsCom->yv += .009 ; std::cout<<"going down, just like my life :/";break;
+			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= .009 ; std::cout<<"lefty loosey";break;
+			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += .02 ; std::cout<<"what is going on";break;
 			default : ;
 		}
 	}
@@ -43,24 +45,22 @@ void InputSystem::update(unsigned int delay){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP:  input.end()->second.physicsCom->yv = 0  ; break; 
-			case SDLK_DOWN: input.end()->second.physicsCom->yv = 0; break;
-			case SDLK_LEFT: input.begin()->second.physicsCom->xv = 0; break;
-			case SDLK_RIGHT: input.end()->second.physicsCom->xv = 0; break;
+			case SDLK_UP:  input.begin()->second.physicsCom->yv += .009  ; break; 
+			case SDLK_DOWN: input.begin()->second.physicsCom->yv -= .009; break;
+			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .009; break;
+			case SDLK_RIGHT: input.begin()->second.physicsCom->xv -= .02; break;
 			default : ;
 		}
 	}
 
 	//While the mouse is moving, constantly get its position
 	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
-		//mx = event.motion.x;
-		//my = event.motion.y;
 		//if in game then set mouse offset as player entity
 		//if( game == running){
 		//	second.positionCom->oldx = x;
-		//	input.begin()->second.positionCom->x = mx;
+		//	input.begin()->second.positionCom->x = event.motion.x;
 		//	second.positionCom->oldy = y;
-		//	input.begin()->second.positionCom->y = my;
+		//	input.begin()->second.positionCom->y = event.motion.y;
 		//}
 	}
 
@@ -71,7 +71,7 @@ void InputSystem::update(unsigned int delay){
         {
 			//If mouse offset is equal to the button offset, then do button down gif
             //If(mx == button.x && my == button.y){
-			//	button down gif nonexistent
+			//	button down gif nonexistent at the moment
 			//}
         }
     }
