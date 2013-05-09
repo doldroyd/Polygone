@@ -35,8 +35,8 @@ void InputSystem::update(unsigned int delay){
 			//For each key, an action respectively
 			case SDLK_UP: input.begin()->second.physicsCom->yv -= .3 ; break; 
 			case SDLK_DOWN:  input.begin()->second.physicsCom->yv += .3 ; break;
-			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= .2 ; break;
-			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += .5 ; break;
+			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= .3 ; break;
+			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += .3 ; break;
 			default : ;
 		}
 	}
@@ -48,8 +48,8 @@ void InputSystem::update(unsigned int delay){
 			//For each key, an action respectively
 			case SDLK_UP:  input.begin()->second.physicsCom->yv += .3  ; break; 
 			case SDLK_DOWN: input.begin()->second.physicsCom->yv -= .3; break;
-			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .2; break;
-			case SDLK_RIGHT: input.begin()->second.physicsCom->xv -= .5; break;
+			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .3; break;
+			case SDLK_RIGHT: input.begin()->second.physicsCom->xv -= .3; break;
 			case SDLK_m: mouseenabled = !mouseenabled;
 			default : ;
 		}
