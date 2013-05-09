@@ -19,7 +19,6 @@ void Loader::load(std::string name) {
         for(YAML::Iterator j = it->begin(); j != it->end(); ++j) {
             std::string key;
             j.first() >> key;
-            std::cout << "Loading Key: " << key << std::endl;
             Engine::instance().getSystem(key)->loadEntity(EntityID, j.second() );
         }
     }

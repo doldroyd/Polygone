@@ -67,7 +67,6 @@ void RenderSystem::update(unsigned int delay) {
 	{
 		r.push_back(&p.second);
 	}
-    std::cout << r.size() << std::endl;
 	std::sort(r.begin(), r.end(), compare);
 	for(auto p : r) {
         //scale image
