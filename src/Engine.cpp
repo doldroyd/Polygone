@@ -9,7 +9,7 @@ bool compareSystem(System *i, System *j) {
 }
 
 bool Engine::init() {
-    return SDL_Init(0) == 0;
+    return SDL_Init(SDL_INIT_TIMER) == 0;
 }
 
 void Engine::cleanup() {

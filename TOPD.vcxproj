@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Collision.cpp" />
     <ClCompile Include="src\Group.cpp" />
     <ClCompile Include="src\Loader.cpp" />
     <ClCompile Include="src\Engine.cpp" />
@@ -23,6 +24,7 @@
     <ClCompile Include="src\Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Collision.h" />
     <ClInclude Include="src\Group.h" />
     <ClInclude Include="src\Loader.h" />
     <ClInclude Include="src\Engine.h" />

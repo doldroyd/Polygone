@@ -2,17 +2,24 @@
 #define COLLISION_H
 
 #include <map>
+#include <vector>
 #include <SDL.h>
+#include <string>
 
-
+#include "Engine.h"
 #include "System.h"
+#include "Position.h"
 
 #define COLLISION_PRIORITY 3
 #define COLLISION_NAME "Collision"
 
+enum Collisions {player, wall, orb, edge, goal};
+
 class CollisionComponent : public Component {
     public:
+        PositionComponent* position;
         int width, height;
+        Collisions type;
 };
 
 
@@ -20,6 +27,9 @@ class CollisionSystem : public System
 {
   private:
     std::map<int, CollisionComponent> collision;
+    bool checkCollision(int Entity1, int Entity2);
+    void consume(int Entity1, int Entity2);
+    void moveback(int EntityID);
   
   public:
     CollisionSystem();
