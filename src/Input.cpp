@@ -56,6 +56,7 @@ void InputSystem::update(unsigned int delay){
 	}
 
 	if(mouseenabled == true){
+		SDL_ShowCursor(SDL_DISABLE);
 		//While the mouse is moving, constantly get its position
 		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
 			//if in game then set mouse offset as player entity
@@ -93,9 +94,10 @@ void InputSystem::update(unsigned int delay){
 			}
 		}
 	}
+	else{SDL_ShowCursor(SDL_ENABLE);}
 }
 
-void InputSystem::cleanup() {SDL_FreeCursor(cursor);}
+void InputSystem::cleanup() {}
 
 void InputSystem::loadEntity(int EntityID, const YAML::Node &node) {
     InputComponent *i = getEntity(EntityID);

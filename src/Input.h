@@ -23,7 +23,6 @@ class InputSystem : public System
 {
 	private:
     std::map<int, InputComponent> input;
-	SDL_Cursor *cursor;
 	bool mouseenabled;
 	double *cameraX;
 
