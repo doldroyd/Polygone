@@ -46,7 +46,7 @@ void SoundSystem::cleanup()
   Mix_CloseAudio();
 }
 
-Component* SoundSystem::getEntity(int EntityID)
+SoundComponent* SoundSystem::getEntity(int EntityID)
 {
   return &(entities[EntityID]);
 }
@@ -140,3 +140,8 @@ void SoundSystem::update(unsigned int delay)
   //get rid of this component / / get next component
   }
 }	              
+
+void SoundSystem::loadEntity(int EntityID, const YAML::Node &node) {
+    SoundComponent *s = getEntity(EntityID);
+    //need to fill in here
+}

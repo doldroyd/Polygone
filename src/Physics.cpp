@@ -15,7 +15,7 @@ void PhysicsSystem::update(unsigned int delay) {
 		p.second.positionCom->y = p.second.positionCom->y + p.second.yv*delay;
 	}
 }
-void cleanup(){}
+void PhysicsSystem::cleanup(){}
 
 
 
@@ -36,4 +36,10 @@ bool PhysicsSystem::removeEntity(int EntityID){
 	bool retval;
 	retval=((1==physics.erase(EntityID))?true:false);
 	return retval;
+}
+
+void PhysicsSystem::loadEntity(int EntityID, const YAML::Node &node) {
+    PhysicsComponent *c = getEntity(EntityID);
+    node["xv"] >> c->xv;
+    node["yv"] >> c->yv;
 }

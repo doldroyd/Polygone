@@ -23,8 +23,10 @@ class SoundComponent : public Component
 
 class SoundSystem : public System
 {
+public:
     SoundSystem(): System(SOUND_PRIORITY, SOUND_NAME) {  music = NULL; sound1 = NULL; sound2 = NULL; sound3 = NULL;
                                         sound4 = NULL; sound5 = NULL; sound6 = NULL; sound7 = NULL; sound8 = NULL; sound9 = NULL; soundn = NULL;/*all the sounds are null*/ }
+private:
   Mix_Music* music;
   Mix_Chunk* sound1;
   Mix_Chunk* sound2;
@@ -36,12 +38,14 @@ class SoundSystem : public System
   Mix_Chunk* sound8;
   Mix_Chunk* sound9;
   Mix_Chunk* soundn;
+  std::map<int, SoundComponent> entities;
 	  	  
+public:
   bool init();
   void update(unsigned int delay);
   void cleanup();
-  Component* getEntity(int EntityID);
-  std::map<int, SoundComponent> entities;
+  SoundComponent* getEntity(int EntityID);
+  void loadEntity(int EntityID, const YAML::Node &node);
 
   bool removeEntity(int EntityID);
 };

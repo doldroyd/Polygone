@@ -104,5 +104,5 @@ bool RenderSystem::removeEntity(int EntityID){
 	return retval;
 }
 
-void cleanup(){}
+void RenderSystem::cleanup(){}
 

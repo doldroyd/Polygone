@@ -31,6 +31,7 @@ class PhysicsSystem : public System
     virtual void cleanup();
 
     virtual PhysicsComponent* getEntity(int EntityID);
+    virtual void loadEntity(int EntityID, const YAML::Node &node);
     virtual bool removeEntity(int EntityID);
 };
 

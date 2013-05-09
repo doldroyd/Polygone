@@ -26,10 +26,12 @@ class InputSystem : public System
 		InputSystem();
 		~InputSystem();
 
+        virtual bool init();
 		virtual void update(unsigned int delay);
 		virtual void cleanup();
 
 		virtual InputComponent* getEntity(int EntityID);
+        virtual void loadEntity(int EntityID, const YAML::Node &node);
 		virtual bool removeEntity(int EntityID);
 
 };

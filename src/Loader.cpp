@@ -9,7 +9,7 @@ Loader::Loader(void) {}
 
 Loader::~Loader(void) {}
 
-void Loader::load(std::string name, Engine *e) {
+void Loader::load(std::string name) {
     std::ifstream fin(name);
     YAML::Parser parser(fin);
     YAML::Node doc;

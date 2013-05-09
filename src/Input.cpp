@@ -68,8 +68,8 @@ void InputSystem::update(unsigned int delay){
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
-            mx = event.button.x;
-            my = event.button.y;
+            //mx = event.button.x;
+            //my = event.button.y;
         }
     }
 
@@ -79,8 +79,8 @@ void InputSystem::update(unsigned int delay){
         if( event.button.button == SDL_BUTTON_LEFT )
         {
             //Get the mouse offsets
-            mx = event.button.x;
-            my = event.button.y;
+            //mx = event.button.x;
+            //my = event.button.y;
 
             //If the mouse is over the button
             //if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
@@ -88,4 +88,15 @@ void InputSystem::update(unsigned int delay){
             //}
         }
     }
+}
+
+void InputSystem::cleanup() {}
+
+void InputSystem::loadEntity(int EntityID, const YAML::Node &node) {
+    InputComponent *i = getEntity(EntityID);
+    //pass?
+}
+
+bool InputSystem::init() {
+    return true;
 }
