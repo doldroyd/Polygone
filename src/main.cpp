@@ -20,9 +20,9 @@ int main(int argc, char* argv[]) {
     Engine::instance().registerSystem(CollisionSystem());
     Engine::instance().init();
     //start engine
+    Loader::load("test.yaml");
     Engine::instance().run();
     //load level
-    Loader::load("test.yaml");
     //cleanup
     Engine::instance().cleanup();
 	return 0;
