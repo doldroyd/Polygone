@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include <SDL.h>
+#include<iostream>
 #include "Engine.h"
 #include "System.h"
 

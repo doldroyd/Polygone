@@ -1,4 +1,5 @@
 #include "Input.h"
+#include <iostream>
 
 InputSystem::InputSystem() : System(INPUT_PRIORITY, INPUT_NAME) {}
 InputSystem::~InputSystem(){}
@@ -31,10 +32,10 @@ void InputSystem::update(unsigned int delay){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-		case SDLK_UP: input.begin()->second.physicsCom->yv += 5 ; break; 
-			case SDLK_DOWN:  input.begin()->second.physicsCom->yv -= 5 ; break;
-			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= 5 ; break;
-			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += 20 ; break;
+			case SDLK_UP: input.begin()->second.physicsCom->yv -= .009 ; std::cout<<"upsy daisy";break; 
+			case SDLK_DOWN:  input.begin()->second.physicsCom->yv += .009 ; std::cout<<"going down, just like my life :/";break;
+			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= .009 ; std::cout<<"lefty loosey";break;
+			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += .02 ; std::cout<<"what is going on";break;
 			default : ;
 		}
 	}
@@ -44,10 +45,10 @@ void InputSystem::update(unsigned int delay){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP:  input.end()->second.physicsCom->yv = 0  ; break; 
-			case SDLK_DOWN: input.end()->second.physicsCom->yv = 0; break;
-			case SDLK_LEFT: input.end()->second.physicsCom->xv = 0; break;
-			case SDLK_RIGHT: input.end()->second.physicsCom->xv = 0; break;
+			case SDLK_UP:  input.begin()->second.physicsCom->yv += .009  ; break; 
+			case SDLK_DOWN: input.begin()->second.physicsCom->yv -= .009; break;
+			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .009; break;
+			case SDLK_RIGHT: input.begin()->second.physicsCom->xv -= .02; break;
 			default : ;
 		}
 	}
