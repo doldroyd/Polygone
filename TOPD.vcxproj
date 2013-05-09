@@ -20,6 +20,7 @@
     <ClCompile Include="src\Physics.cpp" />
     <ClCompile Include="src\PlayerStatus.cpp" />
     <ClCompile Include="src\Position.cpp" />
+    <ClCompile Include="src\Render.cpp" />
     <ClCompile Include="src\Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +32,7 @@
     <ClInclude Include="src\Physics.h" />
     <ClInclude Include="src\PlayerStatus.h" />
     <ClInclude Include="src\Position.h" />
+    <ClInclude Include="src\Render.h" />
     <ClInclude Include="src\System.h" />
     <ClInclude Include="src\Sound.h" />
   </ItemGroup>
