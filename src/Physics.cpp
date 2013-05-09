@@ -11,8 +11,8 @@ bool PhysicsSystem::init(){
 void PhysicsSystem::update(unsigned int delay) {
 	for(auto p : physics)
 	{
-		static_cast<int>(p.second.positionCom->x = static_cast<float>(p.second.positionCom->x) + p.second.xv*static_cast<float>(delay));
-		static_cast<int>(p.second.positionCom->y = static_cast<float>(p.second.positionCom->y) + p.second.yv*static_cast<float>(delay));
+		p.second.positionCom->x = static_cast<int>(static_cast<float>(p.second.positionCom->x) + p.second.xv*static_cast<float>(delay));
+		p.second.positionCom->y = static_cast<int>(static_cast<float>(p.second.positionCom->y) + p.second.yv*static_cast<float>(delay));
 	}
 }
 void PhysicsSystem::cleanup(){}

@@ -2,6 +2,7 @@
 #include "Physics.h"
 #include "Position.h"
 #include "Engine.h"
+#include <iostream>
 
 RenderSystem::RenderSystem(): System(RENDER_PRIORITY, RENDER_NAME){}
 RenderSystem::~RenderSystem() {}
@@ -62,13 +63,18 @@ void RenderSystem::update(unsigned int delay) {
 	cameraX += 5/static_cast<float>(delay); 
 
 	std::vector<RenderComponent*> r;
-	for(auto p : render)
+	for(auto &p : render)
 	{
 		r.push_back(&p.second);
 	}
+    std::cout << r.size() << std::endl;
 	std::sort(r.begin(), r.end(), compare);
 	for(auto p : r) {
         //scale image
+        if(p->width == p->surface->w && p->height == p->surface->h) {
+            apply_surface( p->positionCom->x - static_cast<int>(cameraX), p->positionCom->y, p->surface, screen );
+            continue;
+        }
         SDL_Surface *temp = zoomSurface(p->surface, p->width/static_cast<double>(p->surface->w), p->height/static_cast<double>(p->surface->h), 0);
 		//Apply image
 		apply_surface( p->positionCom->x - static_cast<int>(cameraX), p->positionCom->y, temp, screen );
