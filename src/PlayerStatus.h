@@ -5,36 +5,42 @@
 #include <SDL.h>
 
 #include "System.h"
+#include "Render.h"
 
-#define PLAYERSTATUS_PRIORITY 3 //placeholder
-#define PLAYERSTATUS_NAME "Player Status"//placeholder
+#define PLAYERSTATUS_PRIORITY 9
+#define PLAYERSTATUS_NAME "PlayerStatus"
 
-class PlayerStatusComponent : public Component
-{
+class CollisionComponent;
+
+class PlayerStatusComponent : public Component {
 public:
-  int size, color, scrollSpeed;
-  bool overweight, micro, reverse;
+  RenderComponent* render;
+  CollisionComponent* collision;
+  int size;
 };
 
 class PlayerStatusSystem : public System
 {
 private:
-	std::map<int, PlayerStatusComponent> characterStatus;
+	std::map<int, PlayerStatusComponent> playerStatus;
 
 public:
 	PlayerStatusSystem();
 	~PlayerStatusSystem();
 	
-	virtual bool init(int EntityID);
+	virtual bool init();
 	virtual void update(unsigned int delay);
 	virtual void cleanup();
 
-	virtual void sizeShift(int sizeMod, int EntityID);
-	virtual void colorShift(int colorMod, int EntityID);
-	virtual void scrollShift(int scrollMod, int EntityID);
+	//virtual void sizeShift(int sizeMod, int EntityID);
+	//virtual void colorShift(int colorMod, int EntityID);
+	//virtual void scrollShift(int scrollMod, int EntityID);
 
 	virtual PlayerStatusComponent* getEntity(int EntityID);
+    virtual void loadEntity(int EntityID, const YAML::Node &node);
 	virtual bool removeEntity(int EntityID);
 };
+
+#include "Collision.h"
 
 #endif

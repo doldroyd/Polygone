@@ -17,6 +17,7 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Orb.cpp" />
     <ClCompile Include="src\Physics.cpp" />
     <ClCompile Include="src\PlayerStatus.cpp" />
     <ClCompile Include="src\Position.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="src\Loader.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\Orb.h" />
     <ClInclude Include="src\Physics.h" />
     <ClInclude Include="src\PlayerStatus.h" />
     <ClInclude Include="src\Position.h" />
