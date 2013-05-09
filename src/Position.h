@@ -12,7 +12,7 @@
 
 class PositionComponent : public Component {
     public:
-        int x, y, oldx, oldy;
+        double x, y, oldx, oldy;
 };
 
 

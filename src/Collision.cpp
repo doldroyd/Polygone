@@ -13,10 +13,10 @@ void CollisionSystem::moveback(int EntityID) {
 
 bool CollisionSystem::checkCollision(int E1, int E2) {
     //returns true if they are colliding
-    if( (collision[E1].position->y > collision[E2].position->y + collision[E2].height) &&
-        (collision[E1].position->y + collision[E1].height < collision[E2].position->y) &&
-        (collision[E1].position->x > collision[E2].position->x + collision[E2].width) &&
-        (collision[E1].position->x + collision[E1].width < collision[E2].position->x) ) {
+    if(((collision[E1].position->y < collision[E2].position->y + collision[E2].height) &&
+        (collision[E1].position->y + collision[E1].height > collision[E2].position->y)) &&
+       ((collision[E1].position->x < collision[E2].position->x + collision[E2].width) &&
+        (collision[E1].position->x + collision[E1].width > collision[E2].position->x)) ) {
             return true;
     }
     return false;

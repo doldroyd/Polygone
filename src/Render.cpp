@@ -60,7 +60,7 @@ bool RenderSystem::init(void) {
 void RenderSystem::update(unsigned int delay) {
 
 	//Move camera 
-	cameraX += 5/static_cast<float>(delay); 
+	cameraX += 10.0/1000.0*static_cast<double>(delay); 
 
 	std::vector<RenderComponent*> r;
 	for(auto &p : render)
@@ -72,12 +72,12 @@ void RenderSystem::update(unsigned int delay) {
 	for(auto p : r) {
         //scale image
         if(p->width == p->surface->w && p->height == p->surface->h) {
-            apply_surface( p->positionCom->x - static_cast<int>(cameraX), p->positionCom->y, p->surface, screen );
+            apply_surface( static_cast<int>(p->positionCom->x - cameraX), static_cast<int>(p->positionCom->y), p->surface, screen );
             continue;
         }
         SDL_Surface *temp = zoomSurface(p->surface, p->width/static_cast<double>(p->surface->w), p->height/static_cast<double>(p->surface->h), 0);
 		//Apply image
-		apply_surface( p->positionCom->x - static_cast<int>(cameraX), p->positionCom->y, temp, screen );
+		apply_surface( static_cast<int>(p->positionCom->x - cameraX), static_cast<int>(p->positionCom->y), temp, screen );
         SDL_FreeSurface(temp);
 	}
     SDL_Flip(screen);

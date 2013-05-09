@@ -5,7 +5,7 @@
     height: 10
     type: player
   Position:
-    x: 320
+    x: 50
     y: 240
   Render:
     file: "res/player.png"
@@ -13,7 +13,7 @@
     width: 50
     height: 50
   Physics:
-    xv: 0.002
+    xv: 0.001
     yv: 0
 - Group: 0
   Position:
@@ -23,6 +23,9 @@
     width: 1
     height: 480
     type: edge
+  Physics:
+    xv: 0.01
+    yv: 0.0
 - Group: 0
   Render:
     file: "res/background.png"

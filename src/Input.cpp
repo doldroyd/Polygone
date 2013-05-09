@@ -45,7 +45,7 @@ void InputSystem::update(unsigned int delay){
 			//For each key, an action respectively
 			case SDLK_UP:  input.end()->second.physicsCom->yv = 0  ; break; 
 			case SDLK_DOWN: input.end()->second.physicsCom->yv = 0; break;
-			case SDLK_LEFT: input.end()->second.physicsCom->xv = 0; break;
+			case SDLK_LEFT: input.begin()->second.physicsCom->xv = 0; break;
 			case SDLK_RIGHT: input.end()->second.physicsCom->xv = 0; break;
 			default : ;
 		}

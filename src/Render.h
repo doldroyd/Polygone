@@ -26,7 +26,7 @@ class RenderSystem : public System
 	private:
     std::map<int, RenderComponent> render;
 	SDL_Surface *screen;
-	float cameraX;
+	double cameraX;
 
 	public:
 		RenderSystem();
