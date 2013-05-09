@@ -55,12 +55,7 @@ void Engine::run() {
     SDL_Delay(INITIAL_DELAY);
     while(running) {
         now = SDL_GetTicks();
-        std::cout << now-then << std::endl;
-        for(auto s : systems) {
-            std::cout << s->name << " ";
-            s->update(now - then);
-        }
-        std::cout << std::endl;
+        for(auto s : systems) s->update(now - then);
         then = now;
 	}
 }

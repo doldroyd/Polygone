@@ -41,28 +41,24 @@ void CollisionSystem::update(unsigned int delay){
         }
     }
     //Step 1: check player<>edge collisions until there is no collision between player<>wall and player<>edge
-    bool edgehit = true, done = false;
-    while(!done) {
-        edgehit = false;
-        done = true;
-        //first the edge(s)
-        for(auto e : c[edge]) {
-            if(checkCollision(p, e)) {
-                moveback(p);
-                edgehit = true;
-            }
+    bool edgehit = false;
+    //first the edge(s)
+    for(auto e : c[edge]) {
+        if(checkCollision(p, e)) {
+            //move the player onto the screen;
+            collision[p].position->x = collision[e].position->x + collision[e].width;
+            edgehit = true;
         }
-        //now the walls, doesn't cause a recheck fault
-        for(auto w : c[wall]) {
-            if(checkCollision(p, w)) {
-                if(edgehit) {
-                    //hurt the player, force a recheck
-                    done = false;
-                }
-                else {
-                    moveback(p);
-                    break;//no point in checking others, we must be valid now
-                }
+    }
+    //now the walls, doesn't cause a recheck fault
+    for(auto w : c[wall]) {
+        if(checkCollision(p, w)) {
+            if(edgehit) {
+                //hurt the player, force a recheck
+            }
+            else {
+                moveback(p);
+                break;//no point in checking others, we must be valid now
             }
         }
     }
