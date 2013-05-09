@@ -56,7 +56,11 @@ void Engine::run() {
     while(running) {
         now = SDL_GetTicks();
         std::cout << now-then << std::endl;
-        for(auto s : systems) s->update(now - then);
+        for(auto s : systems) {
+            std::cout << s->name << " ";
+            s->update(now - then);
+        }
+        std::cout << std::endl;
         then = now;
 	}
 }
