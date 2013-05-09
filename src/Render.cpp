@@ -59,7 +59,7 @@ bool RenderSystem::init(void) {
 void RenderSystem::update(unsigned int delay) {
 
 	//Move camera 
-	cameraX += 1; 
+	cameraX += 20/static_cast<float>(delay); 
 
 	std::vector<RenderComponent*> r;
 	for(auto p : render)
@@ -70,7 +70,7 @@ void RenderSystem::update(unsigned int delay) {
 	for(auto p : r) {
 			 
 		//Apply image
-		apply_surface( p->positionCom->x - cameraX, p->positionCom->y, p->surface, screen );
+		apply_surface( p->positionCom->x - static_cast<int>(cameraX), p->positionCom->y, p->surface, screen );
 
 		SDL_Flip(screen);
 	}
@@ -89,7 +89,7 @@ RenderComponent* RenderSystem::getEntity(int EntityID){
 
 void RenderSystem::loadEntity(int EntityID, const YAML::Node &node) {
     RenderComponent *c = getEntity(EntityID);
-    node["Layer"] >> c->layer;
+    node["layer"] >> c->layer;
 	std::string temp;
     node["file"] >> temp;
 	c->surface = load_image(temp);
