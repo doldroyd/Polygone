@@ -27,7 +27,7 @@ class Engine {
 
 		int createEntity();
 		void deleteEntity(int EntityID);
-		bool registerSystem(System &s);
+		bool registerSystem(System *s);
 		System* getSystem(std::string name);
 	
 		void run();

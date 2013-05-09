@@ -8,19 +8,20 @@
 #include "Input.h"
 #include "Loader.h"
 #include "Collision.h"
+#include <iostream>
 
 int main(int argc, char* argv[]) {
     //Create, register, and initialize Systems
-    Engine::instance().registerSystem(GroupSystem());
-    Engine::instance().registerSystem(PositionSystem());
-    Engine::instance().registerSystem(PhysicsSystem());
-    Engine::instance().registerSystem(SoundSystem());
-    Engine::instance().registerSystem(RenderSystem());
-    Engine::instance().registerSystem(InputSystem());
-    Engine::instance().registerSystem(CollisionSystem());
+    Engine::instance().registerSystem(new GroupSystem);
+    Engine::instance().registerSystem(new PositionSystem);
+    Engine::instance().registerSystem(new PhysicsSystem);
+    Engine::instance().registerSystem(new SoundSystem);
+    Engine::instance().registerSystem(new RenderSystem);
+    Engine::instance().registerSystem(new InputSystem);
+    Engine::instance().registerSystem(new CollisionSystem);
     Engine::instance().init();
     //start engine
-    Loader::load("test.yaml");
+    Loader::load("res/test.yaml");
     Engine::instance().run();
     //load level
     //cleanup

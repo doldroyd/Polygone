@@ -1,20 +1,30 @@
 ﻿- Group: 0
-  Position:
-    x: 1
-    y: 0
-  Render:
-    texture: "test.png"
-    layer: 2
   Collision:
-    width: 1
-    height: 1
+    width: 10
+    height: 10
+    type: player
+  Position:
+    x: 50
+    y: 240
+  Render:
+    file: "res/player.png"
+    layer: 2
+    width: 50
+    height: 50
 - Group: 0
   Position:
-    x: 2
-    y: 1
-  Render:
-    texture: "test.png"
-    layer:2
+    x: -1
+    y: 0
   Collision:
     width: 1
-    height: 1
+    height: 480
+    type: edge
+- Group: 0
+  Render:
+    file: "res/background.png"
+    height: 480
+    width: 1280
+    layer: 0
+  Position:
+    x: 0
+    y: 0

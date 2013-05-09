@@ -4,6 +4,7 @@
 #include <map>
 #include "SDL.h"
 #include "SDL_image.h"
+#include <SDL_rotozoom.h>
 
 #include "System.h"
 #include "Physics.h"
@@ -17,7 +18,7 @@ class RenderComponent : public Component
 public:
 	PositionComponent* positionCom;
 	SDL_Surface *surface;
-	int layer;
+	int layer, width, height;
 };
 
 class RenderSystem : public System

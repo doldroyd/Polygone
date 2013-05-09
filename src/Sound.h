@@ -41,13 +41,13 @@ private:
   std::map<int, SoundComponent> entities;
 	  	  
 public:
-  bool init();
-  void update(unsigned int delay);
-  void cleanup();
-  SoundComponent* getEntity(int EntityID);
-  void loadEntity(int EntityID, const YAML::Node &node);
+  virtual bool init();
+  virtual void update(unsigned int delay);
+  virtual void cleanup();
+  virtual SoundComponent* getEntity(int EntityID);
+  virtual void loadEntity(int EntityID, const YAML::Node &node);
 
-  bool removeEntity(int EntityID);
+  virtual bool removeEntity(int EntityID);
 };
 
 #endif //SOUND_H
