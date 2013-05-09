@@ -3,34 +3,42 @@
 //CS 397
 
 #include "Sound.h"
+#include <iostream>
+
+using namespace std;
 
 bool SoundSystem::init()
 {
+  SDL_InitSubSystem(SDL_INIT_AUDIO);
   if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
   {
+	cout << "failed in init" << endl;
     return false;    
   }
 
-  music = Mix_LoadMUS( "music.wav" );
-  sound1 = Mix_LoadWAV( "sound1.wav" );
-  sound2 = Mix_LoadWAV( "sound2.wav" );
-  sound3 = Mix_LoadWAV( "sound3.wav" );
+  music = Mix_LoadMUS( "res/music.wav" );
+  sound1 = Mix_LoadWAV( "res/sound1.wav" );
+//  sound2 = Mix_LoadWAV( "res/sound2.wav" );
+  sound3 = Mix_LoadWAV( "res/sound3.wav" );
 
   
-  if( music == NULL || sound1 == NULL /* || all the sounds )*/)
+  if( music == NULL || sound1 == NULL /*|| sound2 == NULL */|| sound3 == NULL)
   {
-    return false;
+	  cout << "fails in sound files" << endl;
+	  return false;
   }
+  Mix_PlayMusic( music, -1 );
   return true;
 }
 
 void SoundSystem::cleanup()
 {
   Mix_FreeChunk( sound1 );
-  Mix_FreeChunk( sound2 );
+//  Mix_FreeChunk( sound2 );
   Mix_FreeChunk( sound3 );
   Mix_FreeMusic( music );
   Mix_CloseAudio();
+  SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
 SoundComponent* SoundSystem::getEntity(int EntityID)
@@ -41,18 +49,21 @@ SoundComponent* SoundSystem::getEntity(int EntityID)
 
 bool SoundSystem::removeEntity( int EntityID)
 {
-  return( entities.erase( EntityID ) > 0 ? true : false );
+  return( entities.erase( EntityID ) > 0 );
 }
 
 void SoundSystem::update(unsigned int delay)
 {
+
+	if( Mix_PlayingMusic == 0 )
+	{
+		if( Mix_PlayMusic( music, -1 ) == -1 )
+		    return;
+	}
+
+
   while( entities.size() > 0 )
   {
-    if( Mix_PlayingMusic == 0 )
-		{
-		  if( Mix_PlayMusic( music, -1 ) == -1 )
-		    return;
-		}
 	SoundComponent tempComponent = entities.begin()->second; 
 	if( tempComponent.soundname == "musicon" )
 	{

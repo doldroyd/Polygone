@@ -24,11 +24,11 @@ class SoundComponent : public Component
 class SoundSystem : public System
 {
 public:
-	SoundSystem(): System(SOUND_PRIORITY, SOUND_NAME) {  music = NULL; sound1 = NULL; sound2 = NULL; sound3 = NULL;}
+	SoundSystem(): System(SOUND_PRIORITY, SOUND_NAME) {  music = NULL; sound1 = NULL; /*sound2 = NULL;*/ sound3 = NULL;}
 private:
   Mix_Music* music;
   Mix_Chunk* sound1;
-  Mix_Chunk* sound2;
+ // Mix_Chunk* sound2;
   Mix_Chunk* sound3;
 
   std::map<int, SoundComponent> entities;
