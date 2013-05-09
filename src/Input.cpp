@@ -32,10 +32,10 @@ void InputSystem::update(unsigned int delay){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP: input.begin()->second.physicsCom->yv -= .009 ; break; 
-			case SDLK_DOWN:  input.begin()->second.physicsCom->yv += .4 ; break;
-			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= .009 ; break;
-			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += .6 ; break;
+			case SDLK_UP: input.begin()->second.physicsCom->yv -= .3 ; break; 
+			case SDLK_DOWN:  input.begin()->second.physicsCom->yv += .3 ; break;
+			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= .2 ; break;
+			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += .5 ; break;
 			default : ;
 		}
 	}
@@ -45,9 +45,9 @@ void InputSystem::update(unsigned int delay){
 		switch( event.key.keysym.sym )
 		{
 			//For each key, an action respectively
-			case SDLK_UP:  input.begin()->second.physicsCom->yv += .009  ; break; 
-			case SDLK_DOWN: input.begin()->second.physicsCom->yv -= .5; break;
-			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .009; break;
+			case SDLK_UP:  input.begin()->second.physicsCom->yv += .3  ; break; 
+			case SDLK_DOWN: input.begin()->second.physicsCom->yv -= .3; break;
+			case SDLK_LEFT: input.begin()->second.physicsCom->xv += .2; break;
 			case SDLK_RIGHT: input.begin()->second.physicsCom->xv -= .5; break;
 			default : ;
 		}
@@ -57,10 +57,8 @@ void InputSystem::update(unsigned int delay){
 	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
 		//if in game then set mouse offset as player entity
 		//if( game == running){
-		//	second.positionCom->oldx = x;
-		//	input.begin()->second.positionCom->x = event.motion.x;
-		//	second.positionCom->oldy = y;
-		//	input.begin()->second.positionCom->y = event.motion.y;
+			input.begin()->second.positionCom->x = event.motion.x;
+			input.begin()->second.positionCom->y = event.motion.y;
 		//}
 	}
 
@@ -101,5 +99,8 @@ void InputSystem::loadEntity(int EntityID, const YAML::Node &node) {
 }
 
 bool InputSystem::init() {
+	if(SDL_ShowCursor(SDL_DISABLE) < 0){
+		return false;
+	}
     return true;
 }
