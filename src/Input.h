@@ -15,6 +15,7 @@ class InputComponent : public Component
 {
 	public:
 		PhysicsComponent* physicsCom;
+		PositionComponent* positionCom;
 };
 
 class InputSystem : public System
