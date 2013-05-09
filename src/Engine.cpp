@@ -13,7 +13,7 @@ bool Engine::init() {
     if(SDL_Init(SDL_INIT_TIMER) != 0) return false;
     for(auto s : systemDecoder) {
         if(!s.second->init()) {
-            std::cout << "There was an error initializing " << s.second->name << std::endl;
+            //std::cout << "There was an error initializing " << s.second->name << std::endl;
         }
     }
     return true;

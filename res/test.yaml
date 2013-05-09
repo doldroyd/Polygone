@@ -45,3 +45,4 @@
 - {Group: 0, Render: {file: "res/smallify.png", height: 20, width: 20, layer: 1}, Collision: {width: 20, height: 20, type: orb}, Position: {x: 825, y: 120}, Orb: {size: -20}}
 - {Group: 0, Render: {file: "res/largify.png", height: 40, width: 40, layer: 1}, Collision: {width: 40, height: 40, type: orb}, Position: {x: 1560, y: 140}, Orb: {size: 40}, Physics: {xv: -0.02, yv: 0.0}}
 - {Group: 0, Render: {file: "res/largify.png", height: 40, width: 40, layer: 1}, Collision: {width: 40, height: 40, type: orb}, Position: {x: 1560, y: 300}, Orb: {size: 40}, Physics: {xv: -0.02, yv: 0.0}}
+- {Group: 0, Render: {file: "res/black.png", height: 480, width: 640, layer: 0}, Position: {x: 1280, y: 0}}

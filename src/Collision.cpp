@@ -57,16 +57,17 @@ void CollisionSystem::update(unsigned int delay){
     for(auto &w : c[wall]) {
         if(checkCollision(p, w)) {
             if(edgehit) {
-                //hurt the player until ok
+                //hurt the player until safe
                 bool done = false;
                 PlayerStatusComponent *pc = (PlayerStatusComponent*) Engine::instance().getSystem(PLAYERSTATUS_NAME)->getEntity(p);
+                CollisionComponent *pcol = getEntity(p);
                 while(!done) {
                     done = true;
                     pc->size -= 1;
-                    collision[p].height -= 1;
-                    collision[p].width -= 1;
-                    collision[p].position->x -=0.5;
-                    collision[p].position->y -=0.5;
+                    pcol->height -= 1;
+                    pcol->width -= 1;
+                    pcol->position->x += 0.5;
+                    pcol->position->y += 0.5;
                     if(checkCollision(p,w)) done = false;
                 }
             }
