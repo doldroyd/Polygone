@@ -4,13 +4,16 @@
     height: 10
     type: player
   Position:
-    x: 50
+    x: 320
     y: 240
   Render:
     file: "res/player.png"
-    layer: 2
+    layer: 1
     width: 50
     height: 50
+  Physics:
+    xv: 0.002
+    yv: 0
 - Group: 0
   Position:
     x: -1
