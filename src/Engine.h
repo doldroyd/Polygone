@@ -32,6 +32,8 @@ class Engine {
 	
 		void run();
 
+        bool running;
+
 	private:
 		std::map<std::string, System*> systemDecoder;
 		std::vector<System*> systems;
@@ -41,7 +43,6 @@ class Engine {
         Engine(Engine const&);
         void operator=(Engine const&);
 
-		bool running;
 		int nextEntity;
 };
 

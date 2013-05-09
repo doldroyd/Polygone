@@ -20,6 +20,9 @@ bool Engine::init() {
 }
 
 void Engine::cleanup() {
+    for(int i = 0; i < nextEntity; i++) {
+        deleteEntity(i);
+    }
     for(auto sys : systemDecoder) {
         sys.second->cleanup();
     }

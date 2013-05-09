@@ -40,6 +40,7 @@ void CollisionSystem::update(unsigned int delay){
     for(auto &g : c[goal]) {
         if(checkCollision(p, g)) {
             //yay! need to stop the engine, remove all entities and do something else
+            std::cout << "You win!" << std::endl;
         }
     }
     //Step 1: check player<>edge collisions until there is no collision between player<>wall and player<>edge
@@ -56,8 +57,18 @@ void CollisionSystem::update(unsigned int delay){
     for(auto &w : c[wall]) {
         if(checkCollision(p, w)) {
             if(edgehit) {
-                //hurt the player, force a recheck
-                moveback(p);
+                //hurt the player until ok
+                bool done = false;
+                PlayerStatusComponent *pc = (PlayerStatusComponent*) Engine::instance().getSystem(PLAYERSTATUS_NAME)->getEntity(p);
+                while(!done) {
+                    done = true;
+                    pc->size -= 1;
+                    collision[p].height -= 1;
+                    collision[p].width -= 1;
+                    collision[p].position->x -=0.5;
+                    collision[p].position->y -=0.5;
+                    if(checkCollision(p,w)) done = false;
+                }
             }
             else {
                 moveback(p);

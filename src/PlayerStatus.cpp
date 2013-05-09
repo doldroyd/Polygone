@@ -14,6 +14,10 @@ PlayerStatusSystem::~PlayerStatusSystem(){}
 
 void PlayerStatusSystem::update(unsigned int delay){
     for(auto &ps : playerStatus) {
+        if(ps.second.size <= 0) {
+            //you are dead!
+            Engine::instance().running = false;
+        }
         ps.second.render->height = ps.second.size;
         ps.second.render->width = ps.second.size;
         ps.second.collision->height = ps.second.size;

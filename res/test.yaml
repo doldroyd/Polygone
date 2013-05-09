@@ -38,6 +38,19 @@
     x: 0
     y: 0
 - Group: 0
+  Position:
+    x: 1160
+    y: 165
+  Collision:
+    width: 120
+    height: 150
+    type: goal
+  Render:
+    width: 120
+    height: 150
+    file: "res/goal.png"
+    layer: 1
+- Group: 0
   Render:
     file: "res/largify.png"
     height: 40
@@ -64,6 +77,19 @@
   Collision:
     width: 100
     height: 10
+    type: wall
+- Group: 0
+  Render:
+    file: "res/largeV.png"
+    height: 100
+    width: 10
+    layer: 1
+  Position:
+    x: 400
+    y: 100
+  Collision:
+    width: 10
+    height: 100
     type: wall
 - Group: 0
   Render:

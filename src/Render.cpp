@@ -104,13 +104,16 @@ void RenderSystem::loadEntity(int EntityID, const YAML::Node &node) {
 
 }
 bool RenderSystem::removeEntity(int EntityID){
-	RenderComponent *c = getEntity(EntityID);
-	SDL_FreeSurface( c->surface );
-
-	bool retval;
-	retval=((1==render.erase(EntityID))?true:false);
-	return retval;
+	auto c = render.find(EntityID);
+	if(c != render.end()) {
+        SDL_FreeSurface( c->second.surface );
+        return (render.erase(EntityID) == 1);
+    }
+    else
+        return false;
 }
 
-void RenderSystem::cleanup(){}
+void RenderSystem::cleanup(){
+    SDL_QuitSubSystem(SDL_INIT_VIDEO);
+}
 
