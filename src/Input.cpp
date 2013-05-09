@@ -99,8 +99,7 @@ void InputSystem::loadEntity(int EntityID, const YAML::Node &node) {
 }
 
 bool InputSystem::init() {
-	if(SDL_ShowCursor(SDL_DISABLE) < 0){
-		return false;
-	}
+	cursor = SDL_CreateCursor(NULL, NULL, 0,0,0,0);
+	SDL_SetCursor(cursor);
     return true;
 }
