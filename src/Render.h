@@ -9,7 +9,7 @@
 #include "Physics.h"
 #include "Position.h"
 
-#define RENDER_PRIORITY 5 //placeholder
+#define RENDER_PRIORITY 10 //placeholder
 #define RENDER_NAME "Render" //placeholder
 
 class RenderComponent : public Component
@@ -24,16 +24,12 @@ class RenderSystem : public System
 {
 	private:
     std::map<int, RenderComponent> render;
-	std::vector<System*> layers;
 	SDL_Surface *screen;
-	SDL_Surface *background;
-	int cameraX,cameraY;
+	float cameraX;
 
 	public:
 		RenderSystem();
 		~RenderSystem();
-
-		bool registerLayer(System &s);
 
 		virtual bool init();
 		virtual void update(unsigned int delay);

@@ -6,21 +6,10 @@
 RenderSystem::RenderSystem(): System(RENDER_PRIORITY, RENDER_NAME){}
 RenderSystem::~RenderSystem() {}
 
-bool compareLayer(System *i, System *j) {
-    //return i->priority < j->priority;
-	return true;
+bool compare(RenderComponent *i, RenderComponent *j) {
+    return i->layer < j->layer;
 }
 
-bool RenderSystem::registerLayer(System &s) {
-	/*std::pair<std::map<std::string, System*>::iterator, bool> result;
-	result = render.insert(std::make_pair(s.name, &s));
-	if(!result.second) {
-		return false;
-	}
-	layers.push_back(&s);
-	std::sort(layers.begin(), layers.end(), compareLayer); */
-	return true;
-}
 
 //Load image function
 SDL_Surface *load_image( std::string filename ) 
@@ -58,47 +47,33 @@ void apply_surface( int x, int y, SDL_Surface* source, SDL_Surface* destination 
 
 bool RenderSystem::init(void) {
 	//Start SDL 
-	SDL_Init( SDL_INIT_VIDEO);
+	SDL_InitSubSystem( SDL_INIT_VIDEO);
 	//Set up screen 
-	screen = SDL_SetVideoMode( 640, 480, 32, SDL_SWSURFACE );
-
-	//Load background image
-	background = load_image( "background.png" );
+	screen = SDL_SetVideoMode( 640, 480, 32, SDL_DOUBLEBUF|SDL_HWSURFACE);
 
 	cameraX = 0;
-	cameraY = 0;
 
 	return true;
 
 }
 void RenderSystem::update(unsigned int delay) {
-	//The offsets of the background 
-	int bgX = 0, bgY = 0;
-
-	/*//Scroll background 
-	bgX -= 2; 
-
-	//If the background has gone too far 
-	if( bgX <= -background->w ) { 
-		//Reset the offset 
-		bgX = 0;
-	} */
-
-	//Apply the background to the screen 
-	apply_surface( bgX - cameraX, cameraY, background, screen );
-	//apply_surface( bgX + background->w, bgY, background, screen );
 
 	//Move camera 
 	cameraX += 1; 
 
-	/*for(auto p : render)
+	std::vector<RenderComponent*> r;
+	for(auto p : render)
 	{
-		//Load current entity
-		p.loadEntity;
-	 
+		r.push_back(&p.second);
+	}
+	std::sort(r.begin(), r.end(), compare);
+	for(auto p : r) {
+			 
 		//Apply image
-		apply_surface( p.second.positionCom->x, p.second.positionCom->y, surface, screen );
-	} */
+		apply_surface( p->positionCom->x - cameraX, p->positionCom->y, p->surface, screen );
+
+		SDL_Flip(screen);
+	}
 }
 
 RenderComponent* RenderSystem::getEntity(int EntityID){
@@ -115,11 +90,15 @@ RenderComponent* RenderSystem::getEntity(int EntityID){
 void RenderSystem::loadEntity(int EntityID, const YAML::Node &node) {
     RenderComponent *c = getEntity(EntityID);
     node["Layer"] >> c->layer;
-    node["filename"] >> c->surface = load_image( "filename.png" ); //???
-    //c->oldx = c->x;
-    //c->oldy = c->y;
+	std::string temp;
+    node["file"] >> temp;
+	c->surface = load_image(temp);
+
 }
 bool RenderSystem::removeEntity(int EntityID){
+	RenderComponent *c = getEntity(EntityID);
+	SDL_FreeSurface( c->surface );
+
 	bool retval;
 	retval=((1==render.erase(EntityID))?true:false);
 	return retval;
