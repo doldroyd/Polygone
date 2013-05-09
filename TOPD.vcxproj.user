@@ -12,5 +12,6 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <LocalDebuggerEnvironment>PATH=%PATH%;$(ProjectDir)SDL-1.2.15\lib\x86;$(ProjectDir)SDL_mixer-1.2.12\lib\x86;$(ProjectDir)yaml-cpp\lib\x86;$(ProjectDir)ozcollide-1.1.1\lib\x86
 $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerDebuggerType>Auto</LocalDebuggerDebuggerType>
   </PropertyGroup>
 </Project>

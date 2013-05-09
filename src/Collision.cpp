@@ -40,7 +40,7 @@ void CollisionSystem::update(unsigned int delay){
     for(auto &g : c[goal]) {
         if(checkCollision(p, g)) {
             //yay! need to stop the engine, remove all entities and do something else
-            std::cout << "You win!" << std::endl;
+            Engine::instance().running = false;
         }
     }
     //Step 1: check player<>edge collisions until there is no collision between player<>wall and player<>edge
