@@ -15,13 +15,7 @@ bool SoundSystem::init()
   sound1 = Mix_LoadWAV( "sound1.wav" );
   sound2 = Mix_LoadWAV( "sound2.wav" );
   sound3 = Mix_LoadWAV( "sound3.wav" );
-  sound4 = Mix_LoadWAV( "sound4.wav" );
-  sound5 = Mix_LoadWAV( "sound5.wav" );
-  sound6 = Mix_LoadWAV( "sound6.wav" );
-  sound7 = Mix_LoadWAV( "sound7.wav" );
-  sound8 = Mix_LoadWAV( "sound8.wav" );
-  sound9 = Mix_LoadWAV( "sound9.wav" );
-  soundn = Mix_LoadWAV( "soundn.wav" );
+
   
   if( music == NULL || sound1 == NULL /* || all the sounds )*/)
   {
@@ -35,13 +29,6 @@ void SoundSystem::cleanup()
   Mix_FreeChunk( sound1 );
   Mix_FreeChunk( sound2 );
   Mix_FreeChunk( sound3 );
-  Mix_FreeChunk( sound4 );
-  Mix_FreeChunk( sound5 );
-  Mix_FreeChunk( sound6 );
-  Mix_FreeChunk( sound7 );
-  Mix_FreeChunk( sound8 );
-  Mix_FreeChunk( sound9 );
-  Mix_FreeChunk( soundn );
   Mix_FreeMusic( music );
   Mix_CloseAudio();
 }
@@ -61,7 +48,12 @@ void SoundSystem::update(unsigned int delay)
 {
   while( entities.size() > 0 )
   {
-    SoundComponent tempComponent = entities.begin()->second; 
+    if( Mix_PlayingMusic == 0 )
+		{
+		  if( Mix_PlayMusic( music, -1 ) == -1 )
+		    return;
+		}
+	SoundComponent tempComponent = entities.begin()->second; 
 	if( tempComponent.soundname == "musicon" )
 	{
 	  //do music on things
@@ -102,40 +94,26 @@ void SoundSystem::update(unsigned int delay)
       //do music off things
       Mix_HaltMusic();
 	}
-    /* switch cannot use a string, removed for now
-	switch( tempComponent.soundname )
-	{
-	  case "sound1" : if( Mix_PlayChannel( tempComponent.channel, sound1, 0 ) ) == -1 )
+    if( tempComponent.soundname == "sound1" )
+    {
+	   if( Mix_PlayChannel( tempComponent.channel, sound1, 0 )  == -1 )
 					    return;
 		              break;
-      case "sound2" : if( Mix_PlayChannel( tempComponent.channel, sound2, 0 ) ) == -1 )
+    }
+    if( tempComponent.soundname == "sound2" )
+    {
+	   if( Mix_PlayChannel( tempComponent.channel, sound1, 0 )  == -1 )
 					    return;
 		              break;
-	  case "sound3" : if( Mix_PlayChannel( tempComponent.channel, sound3, 0 ) ) == -1 )
+    }
+    if( tempComponent.soundname == "sound3" )
+    {
+	   if( Mix_PlayChannel( tempComponent.channel, sound1, 0 )  == -1 )
 					    return;
 		              break;
-	  case "sound4" : if( Mix_PlayChannel( tempComponent.channel, sound4, 0 ) ) == -1 )
-					    return;
-		              break;
-	  case "sound5" : if( Mix_PlayChannel( tempComponent.channel, sound5, 0 ) ) == -1 )
-					    return;
-					  break;
-	  case "sound6" : if( Mix_PlayChannel( tempComponent.channel, sound6, 0 ) ) == -1 )
-					    return;
-		              break;
-	  case "sound7" : if( Mix_PlayChannel( tempComponent.channel, sound7, 0 ) ) == -1 )
-					    return;
-		              break;
-      case "sound8" : if( Mix_PlayChannel( tempComponent.channel, sound8, 0 ) ) == -1 )
-					    return;
-		              break;
-	  case "sound9" : if( Mix_PlayChannel( tempComponent.channel, sound9, 0 ) ) == -1 )
-					    return;
-		              break;
-	  case "soundn" : if( Mix_PlayChannel( tempComponent.channel, soundn, 0 ) ) == -1 )
-					    return;
-	}
-    */
+    }
+  
+    
 	entities.erase( entities.begin() );
   //get rid of this component / / get next component
   }

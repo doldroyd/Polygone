@@ -1,4 +1,5 @@
 #include "Collision.h"
+#include "Sound.h"
 
 void CollisionSystem::consume(int Entity1, int Entity2) {
     PlayerStatusComponent* pc = (PlayerStatusComponent*) Engine::instance().getSystem(PLAYERSTATUS_NAME)->getEntity(Entity1);
@@ -32,6 +33,13 @@ bool CollisionSystem::init() {
 }
 void CollisionSystem::update(unsigned int delay){
     std::map<Collisions, std::vector<int>> c;
+	SoundComponent* effect;
+	int soundID;
+	SoundSystem* soundsystem = (SoundSystem*) Engine::instance().getSystem(SOUND_NAME);
+	soundID = Engine::instance().createEntity();
+	effect = soundsystem->getEntity(soundID);
+	effect->soundname = "sound1";
+
     for(auto &comp : collision) {
         c[comp.second.type].push_back(comp.first);
     }
