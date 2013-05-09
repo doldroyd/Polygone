@@ -12,6 +12,7 @@ InputComponent* InputSystem::getEntity(int EntityID){
 	if(i == input.end()){
 		input[EntityID].physicsCom = (PhysicsComponent*) Engine::instance().getSystem(PHYSICS_NAME)->getEntity(EntityID);
 		input[EntityID].positionCom = (PositionComponent*) Engine::instance().getSystem(POSITION_NAME)->getEntity(EntityID);
+		input[EntityID].player = (PlayerStatusComponent*) Engine::instance().getSystem(PLAYERSTATUS_NAME)->getEntity(EntityID);
 	}
 	InputComponent* retval = &(input[EntityID]);
 	return retval;
@@ -54,15 +55,16 @@ void InputSystem::update(unsigned int delay){
 			default : ;
 		}
 	}
-
+	//Allows for the usage of mouse for player control
 	if(mouseenabled == true){
+		//The cursor becomes invisible while controlling the player 
 		SDL_ShowCursor(SDL_DISABLE);
 		//While the mouse is moving, constantly get its position
 		while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
 			//if in game then set mouse offset as player entity
 			//if( game == running){
-				input.begin()->second.positionCom->x = event.motion.x + *cameraX;
-				input.begin()->second.positionCom->y = event.motion.y;
+				input.begin()->second.positionCom->x = event.motion.x + *cameraX - input.begin()->second.player->size/2;
+				input.begin()->second.positionCom->y = event.motion.y - input.begin()->second.player->size/2;
 			//}
 		}
 
@@ -71,9 +73,10 @@ void InputSystem::update(unsigned int delay){
 			//If the left mouse button was pressed
 			if( event.button.button == SDL_BUTTON_LEFT )
 			{
-				//If mouse offset is equal to the button offset, then do button down gif
+				//If mouse offset is equal to the button offset, then do button down png
 				//If(mx == button.x && my == button.y){
-				//	button down gif nonexistent at the moment
+				//	mainly for the main menu system that hasn't been made yet
+				//	button down png nonexistent at the moment
 				//}
 			}	
 		}
@@ -83,10 +86,7 @@ void InputSystem::update(unsigned int delay){
 	        //If the left mouse button was released
 			if( event.button.button == SDL_BUTTON_LEFT )
 			{
-	            //Get the mouse offsets
-				//mx = event.button.x;
-				//my = event.button.y;
-	
+				//Potentially for accessing the the main menu and any other menus that haven't been implemented yet
 	            //If the mouse is over the button
 				//if( ( mx > box.x ) && ( mx < box.x + box.w ) && ( my > box.y ) && ( my < box.y + box.h ) )
 				//{
@@ -94,6 +94,7 @@ void InputSystem::update(unsigned int delay){
 			}
 		}
 	}
+	//Show the curser upon not controlling the player with the mouse
 	else{SDL_ShowCursor(SDL_ENABLE);}
 }
 

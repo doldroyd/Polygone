@@ -8,6 +8,7 @@
 
 #include "Position.h"
 #include "Physics.h"
+#include "PlayerStatus.h"
 
 #define INPUT_PRIORITY 3 //placeholder
 #define INPUT_NAME "Input" //placeholder
@@ -17,6 +18,7 @@ class InputComponent : public Component
 	public:
 		PhysicsComponent* physicsCom;
 		PositionComponent* positionCom;
+		PlayerStatusComponent* player;
 };
 
 class InputSystem : public System
