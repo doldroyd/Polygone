@@ -8,7 +8,7 @@ InputComponent* InputSystem::getEntity(int EntityID){
 	//insert
     auto i = input.find(EntityID);
 	if(i == input.end()){
-		input[EntityID].physicsCom = (PhysicsComponent*) Engine::instance().getSystem(POSITION_NAME)->getEntity(EntityID);
+		input[EntityID].physicsCom = (PhysicsComponent*) Engine::instance().getSystem(PHYSICS_NAME)->getEntity(EntityID);
 	}
 	InputComponent* retval = &(input[EntityID]);
 	return retval;
@@ -33,7 +33,7 @@ void InputSystem::update(unsigned int delay){
 		case SDLK_UP: input.begin()->second.physicsCom->yv += 5 ; break; 
 			case SDLK_DOWN:  input.begin()->second.physicsCom->yv -= 5 ; break;
 			case SDLK_LEFT:  input.begin()->second.physicsCom->xv -= 5 ; break;
-			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += 5 ; break;
+			case SDLK_RIGHT:  input.begin()->second.physicsCom->xv += 20 ; break;
 			default : ;
 		}
 	}
@@ -55,10 +55,12 @@ void InputSystem::update(unsigned int delay){
 	while(SDL_PeepEvents(&event, 1, SDL_GETEVENT, SDL_EVENTMASK(SDL_MOUSEMOTION))){
 		//mx = event.motion.x;
 		//my = event.motion.y;
-		//If in game, set main character entity's coordinates as mouse coordinates
-		//if (game == running){
-		//	position.x = mx;
-		//	position.y = my;
+		//if in game then set mouse offset as player entity
+		//if( game == running){
+		//	second.positionCom->oldx = x;
+		//	input.begin()->second.positionCom->x = mx;
+		//	second.positionCom->oldy = y;
+		//	input.begin()->second.positionCom->y = my;
 		//}
 	}
 
@@ -67,9 +69,10 @@ void InputSystem::update(unsigned int delay){
 		//If the left mouse button was pressed
         if( event.button.button == SDL_BUTTON_LEFT )
         {
-            //Get the mouse offsets
-            //mx = event.button.x;
-            //my = event.button.y;
+			//If mouse offset is equal to the button offset, then do button down gif
+            //If(mx == button.x && my == button.y){
+			//	button down gif nonexistent
+			//}
         }
     }
 

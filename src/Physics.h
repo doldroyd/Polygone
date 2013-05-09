@@ -14,7 +14,7 @@ class PhysicsComponent : public Component
 {
 public:
   PositionComponent* positionCom;
-  int xv, yv;
+  float xv, yv;
 };
 
 class PhysicsSystem : public System
