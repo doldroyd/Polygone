@@ -12,7 +12,9 @@ bool compareSystem(System *i, System *j) {
 bool Engine::init() {
     if(SDL_Init(SDL_INIT_TIMER) != 0) return false;
     for(auto s : systemDecoder) {
-        s.second->init();
+        if(!s.second->init()) {
+            std::cout << "There was an error initializing " << s.second->name << std::endl;
+        }
     }
     return true;
 }

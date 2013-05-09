@@ -35,3 +35,55 @@
   Position:
     x: 0
     y: 0
+- Group: 0
+  Render:
+    file: "res/largeH.png"
+    height: 10
+    width: 100
+    layer: 1
+  Position:
+    x: 0
+    y: 10
+  Collision:
+    width: 100
+    height: 10
+    type: wall
+- Group: 0
+  Render:
+    file: "res/largeH.png"
+    height: 10
+    width: 100
+    layer: 1
+  Position:
+    x: 100
+    y: 10
+  Collision:
+    width: 100
+    height: 10
+    type: wall
+- Group: 0
+  Render:
+    file: "res/largeH.png"
+    height: 10
+    width: 100
+    layer: 1
+  Position:
+    x: 200
+    y: 10
+  Collision:
+    width: 100
+    height: 10
+    type: wall
+- Group: 0
+  Render:
+    file: "res/largeH.png"
+    height: 10
+    width: 100
+    layer: 1
+  Position:
+    x: 300
+    y: 10
+  Collision:
+    width: 100
+    height: 10
+    type: wall
