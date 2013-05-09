@@ -7,7 +7,7 @@ bool PositionSystem::init() {
     return true;
 }
 void PositionSystem::update(unsigned int delay){
-    for(auto p : position) {
+    for(auto &p : position) {
         p.second.oldx = p.second.x;
         p.second.oldy = p.second.y;
     }

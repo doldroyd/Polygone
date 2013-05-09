@@ -9,6 +9,8 @@
 #include "Engine.h"
 #include "System.h"
 #include "Position.h"
+#include "PlayerStatus.h"
+#include "Orb.h"
 
 #define COLLISION_PRIORITY 3
 #define COLLISION_NAME "Collision"

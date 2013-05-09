@@ -9,7 +9,7 @@ bool PhysicsSystem::init(){
 	return true;
 }
 void PhysicsSystem::update(unsigned int delay) {
-	for(auto p : physics)
+	for(auto &p : physics)
 	{
 		p.second.positionCom->x = p.second.positionCom->x + p.second.xv*static_cast<double>(delay);
 		p.second.positionCom->y = p.second.positionCom->y + p.second.yv*static_cast<double>(delay);

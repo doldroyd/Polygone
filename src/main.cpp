@@ -8,6 +8,8 @@
 #include "Input.h"
 #include "Loader.h"
 #include "Collision.h"
+#include "PlayerStatus.h"
+#include "Orb.h"
 #include <iostream>
 
 int main(int argc, char* argv[]) {
@@ -19,6 +21,8 @@ int main(int argc, char* argv[]) {
     Engine::instance().registerSystem(new RenderSystem);
     Engine::instance().registerSystem(new InputSystem);
     Engine::instance().registerSystem(new CollisionSystem);
+    Engine::instance().registerSystem(new PlayerStatusSystem);
+    Engine::instance().registerSystem(new OrbSystem);
     Engine::instance().init();
     //start engine
     Loader::load("res/test.yaml");
